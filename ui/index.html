@@ -17,7 +17,6 @@
   <!-- <script src="core/manup.js"></script> -->
   <!-- End of Progressive Web Application setup -->
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script src="./plugins/gtag/gtag.js"></script>
 
   <script>
@@ -59,7 +58,6 @@
 
     gtag('config', 'UA-162001686-1');
   </script>
-  <!-- <link rel="stylesheet" href="style.css?ver=0.2.3.1125"> -->
   <!-- <link rel="stylesheet" href="core/libs.css"> -->
   <script src="core/storage.js?ver=0.2.2.1125"></script>
   <script src="core/blockly_compressed.js?ver=0.2.1.8260042"></script>
@@ -86,17 +84,13 @@
   <script src="core/codemirror/mode/python/python.js"></script>
 
   <!-- Progressive Web Application setup -->
-  <script type="module">
+  <!-- <script type="module">
     // This is the "Offline copy of pages" service worker
-
-    /*
-      This code uses the pwa-update web component https://github.com/pwa-builder/pwa-update to register your service worker, tell the user when there is an update available and let the user know when your PWA is ready to use offline.
-    */
-
+    // This code uses the pwa-update web component https://github.com/pwa-builder/pwa-update to register your service worker, tell the user when there is an update available and let the user know when your PWA is ready to use offline.
     import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
     const el = document.createElement('pwa-update');
     document.body.appendChild(el);
-  </script>
+  </script> -->
 
   <!-- End of Progressive Web Application setup -->
 
@@ -111,21 +105,20 @@
 </head>
 
 <body>
-
   <div class="top-menu">
-
     <div class="logo">BIPES</div>
     <div class="tabs">
       <div id="tab_blocks" class="tabon">...</div>
       <div id="tab_console" class="taboff">Console</div>
       <div id="tab_files" class="taboff">...</div>
-      <div id="tab_programs" class="taboff">...</div>
-      <div id="tab_device" class="taboff">...</div>
-      <div id="tab_iot" class="taboff">IOT</div>
-      <div id="tab_mqtt" class="taboff"
+      <!-- <div id="tab_programs" class="taboff">...</div> -->
+      <!-- <div id="tab_device" class="taboff">...</div> -->
+      <!-- <div id="tab_iot" class="taboff">IOT</div> -->
+      <!-- <div id="tab_mqtt" class="taboff"
         onclick='document.getElementById("easymqtt_iframe").contentWindow.startEasyMQTT(window.easyMQTT_session);'>
-        EasyMQTT</div>
-      <div id="tab_databoard" class="taboff">Databoard</div>
+        EasyMQTT
+      </div> -->
+      <!-- <div id="tab_databoard" class="taboff">Databoard</div> -->
     </div>
     <button id="toolbarButton" class="notext icon medium" title="..."></button>
     <div class="toolbar">
@@ -249,34 +242,6 @@
 
   <!-- ################################################## -->
 
-  <div id="content_programs" class="content">
-    <center>
-      <!--
-        <iframe src="https://bipes-271213.appspot.com/list" width="100%" height="500" frameBorder="0"></iframe>
-	    -->
-      <iframe src="shared.html" width="100%" height="500" frameBorder="0"></iframe>
-    </center>
-  </div>
-
-  <!-- ################################################## -->
-
-  <div id="content_device" class="content">
-    <center>
-      <label id="device_title"><b>ESP8266</b><br></label>
-      <br>
-      <img id="device_img" src="devinfo/Node-MCU-ESP-12E-Pin-Out-Diagram2.jpg">
-      <br>
-
-      <label id="device_desc">
-        <BR><BR><input type='button' onclick='loadDoc();' value='Open Documentation' /> <BR><BR>To use ESP8266, simply
-        connecto to MicroPython board using Wifi. Micropython must be previously installed on the board. Follow these
-        instructions to install it.
-      </label>
-    </center>
-  </div>
-
-  <!-- ################################################## -->
-
   <div id="content_files" class="content">
     <div id="file-boxes">
       <div id="file-header">
@@ -343,24 +308,6 @@
 
   <!-- ################################################## -->
 
-  <div id="content_iot" class="content">
-    <iframe id="content_iot" src="freeboard/index.html" width="100%" height="100%" frameBorder="0"></iframe>
-  </div>
-
-  <!-- ################################################## -->
-
-  <div id="content_mqtt" class="content" style="padding: 0;">
-    <iframe id="easymqtt_iframe" src="../easymqtt/index.html" width="100%" height="100%" frameBorder="0"></iframe>
-  </div>
-
-  <!-- ################################################## -->
-
-  <div id="content_databoard" class="content" style="padding: 0;">
-    <iframe id="databoard_iframe" src="../databoard/index.html" width="100%" height="100%" frameBorder="0"></iframe>
-  </div>
-
-  <!-- ################################################## -->
-
   </div>
   <div class='progress-bar'></div>
   <div class="notify"></div>
@@ -387,6 +334,7 @@
     </details>
   </div>
 
+  <div>
     <script>
       // Init blockly
       Code.init();
@@ -422,7 +370,7 @@
 
       window.onload = function () {
         checkCookie()
-        loadPage(); //Load modal splash screen
+        // loadPage(); //Load modal splash screen
 
         //i18n
         //Auto detect user language (from the browser)
@@ -445,25 +393,25 @@
           addMsg += " | <a href=/beta2/ui/?lang=en>Access BIPES in English</a>";
         }
 
-        if (MSG["splash_welcome"])
-          document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
-        else
-          document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
+        // if (MSG["splash_welcome"])
+        //   document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
+        // else
+        //   document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
 
-        if (MSG["splash_message"])
-          document.getElementById("modalMsg").innerHTML = MSG["splash_message"] + addMsg;
-        else
-          document.getElementById("modalMsg").innerHTML = "<p><b>**BIPES: Block based Integrated Platform for Embedded Systems</B> allows text and block based programming for several types of embedded systems and Internet of Things modules using MicroPython, CircuitPython, Python or Snek. You can connect, program, debug and monitor several types of boards using network, USB or Bluetooth. Please check a list of <a href=https://bipes.net.br/wp/boards/>compatible boards here</a>. Compatible boards include STM32, ESP32, ESP8266, Raspberry Pi Pico and even Arduino.  <p><b>BIPES</b> is fully <a href=https://bipes.net.br/wp/development/>open source</a> and based on HTML and JavaScript, so no software install or configuration is needed and you can use it offline! We hope BIPES is useful for you and that you can enjoy using BIPES. If you need help, we now have a <a href=https://github.com/BIPES/BIPES/discussions>discussion forum</a>, where we also post <a href=https://github.com/BIPES/BIPES/discussions/categories/announcements>new features and announcements about BIPES</a>. Feel free to use it! Also, we invite you to use the forum to leave feedbacks and suggestions for BIPES!</p><p>Checkout BIPES Book: <a href=https://bipes.net.br/wp/book-livro/>https://bipes.net.br/wp/book-livro/</a></p> <p>Thank you from the BIPES Team!</p>" + addMsg;
+        // if (MSG["splash_message"])
+        //   document.getElementById("modalMsg").innerHTML = MSG["splash_message"] + addMsg;
+        // else
+        //   document.getElementById("modalMsg").innerHTML = "<p><b>**BIPES: Block based Integrated Platform for Embedded Systems</B> allows text and block based programming for several types of embedded systems and Internet of Things modules using MicroPython, CircuitPython, Python or Snek. You can connect, program, debug and monitor several types of boards using network, USB or Bluetooth. Please check a list of <a href=https://bipes.net.br/wp/boards/>compatible boards here</a>. Compatible boards include STM32, ESP32, ESP8266, Raspberry Pi Pico and even Arduino.  <p><b>BIPES</b> is fully <a href=https://bipes.net.br/wp/development/>open source</a> and based on HTML and JavaScript, so no software install or configuration is needed and you can use it offline! We hope BIPES is useful for you and that you can enjoy using BIPES. If you need help, we now have a <a href=https://github.com/BIPES/BIPES/discussions>discussion forum</a>, where we also post <a href=https://github.com/BIPES/BIPES/discussions/categories/announcements>new features and announcements about BIPES</a>. Feel free to use it! Also, we invite you to use the forum to leave feedbacks and suggestions for BIPES!</p><p>Checkout BIPES Book: <a href=https://bipes.net.br/wp/book-livro/>https://bipes.net.br/wp/book-livro/</a></p> <p>Thank you from the BIPES Team!</p>" + addMsg;
 
-        if (MSG["splash_footer"])
-          document.getElementById("modalFooter").innerHTML = MSG["splash_footer"];
-        else
-          document.getElementById("modalFooter").innerHTML = "Do not show this screen again";
+        // if (MSG["splash_footer"])
+        //   document.getElementById("modalFooter").innerHTML = MSG["splash_footer"];
+        // else
+        //   document.getElementById("modalFooter").innerHTML = "Do not show this screen again";
 
-        if (MSG["splash_close"])
-          document.getElementById("modalClose").innerHTML = MSG["splash_close"];
-        else
-          document.getElementById("modalClose").innerHTML = "Close";
+        // if (MSG["splash_close"])
+        //   document.getElementById("modalClose").innerHTML = MSG["splash_close"];
+        // else
+        //   document.getElementById("modalClose").innerHTML = "Close";
 
         //if (userLang.startsWith("pt")) {
         //	//alert("pt");
@@ -613,6 +561,46 @@
       BIPES
     -->
   </div>
+
+  <!-- ################################################## -->
+  <!-- <div id="content_mqtt" class="content" style="padding: 0;">
+    <iframe id="easymqtt_iframe" src="../easymqtt/index.html" width="100%" height="100%" frameBorder="0"></iframe>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_iot" class="content">
+    <iframe id="content_iot" src="freeboard/index.html" width="100%" height="100%" frameBorder="0"></iframe>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_databoard" class="content" style="padding: 0;">
+    <iframe id="databoard_iframe" src="../databoard/index.html" width="100%" height="100%" frameBorder="0"></iframe>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_device" class="content">
+    <center>
+      <label id="device_title"><b>ESP8266</b><br></label>
+      <br>
+      <img id="device_img" src="devinfo/Node-MCU-ESP-12E-Pin-Out-Diagram2.jpg">
+      <br>
+
+      <label id="device_desc">
+        <BR><BR><input type='button' onclick='loadDoc();' value='Open Documentation' /> <BR><BR>To use ESP8266, simply
+        connecto to MicroPython board using Wifi. Micropython must be previously installed on the board. Follow these
+        instructions to install it.
+      </label>
+    </center>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_programs" class="content">
+    <center>
+      <iframe src="https://bipes-271213.appspot.com/list" width="100%" height="500" frameBorder="0"></iframe>
+	   
+      <iframe src="shared.html" width="100%" height="500" frameBorder="0"></iframe>
+    </center>
+  </div> -->
 
   <!-- The Modal -->
   <!-- <div id="myModal" class="modal">

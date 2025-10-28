@@ -477,12 +477,12 @@ class workspace {
 
     this.defaultToolbox = 'default.xml';
     this.selector = get('#device_selector');
-    this.content = get('#content_device');
+    // this.content = get('#content_device');
     this.toolbarButton = get('#toolbarButton');
     this.channel_connect = get('#channel_connect');
-    this.device_title = getIn(this.content, '#device_title'),
-    this.device_img = getIn(this.content, '#device_img'),
-    this.device_desc = getIn(this.content, '#device_desc');
+    // this.device_title = getIn(this.content, '#device_title'),
+    // this.device_img = getIn(this.content, '#device_img'),
+    // this.device_desc = getIn(this.content, '#device_desc');
     /** gets `devinfo/devinfo.json` data as an object.*/
     this.devices = [];
     xhrGET("devinfo/devinfo.json", 'json', (response) => {
@@ -590,9 +590,9 @@ workspace.prototype.change = function () {
 
   if (this.selector.value in this.devices) {
     let selected = this.devices [this.selector.value];
-    this.device_title.innerHTML = selected.title,
-    this.device_img.src = selected.img,
-    this.device_desc.innerHTML = selected.description;
+    // this.device_title.innerHTML = selected.title,
+    // this.device_img.src = selected.img,
+    // this.device_desc.innerHTML = selected.description;
 
     if (!!selected.toolbox) { // checks if toolbox is set
        xhrGET(`toolbox/${selected.toolbox}`, 'document', (XML_) => {

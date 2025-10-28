@@ -178,6 +178,10 @@ module.exports = {
                     from: path.resolve(__dirname, 'b'),
                     to: 'b',
                 },
+                {
+                    from: path.resolve(__dirname, 'media'),
+                    to: 'media'
+                }
             ]
         })
     ],
@@ -186,7 +190,7 @@ module.exports = {
     // 开发服务器 npx webpack serve
     devServer: {
         port: 5001, // 启动服务器端口号
-        open: true, // 是否自动打开浏览器
+        open: false, // 是否自动打开浏览器
         hot: true, // 开启HMR（默认值）
         client: {
             // 控制台提示内容

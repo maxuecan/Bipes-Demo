@@ -178,8 +178,8 @@ Code.LANG = Code.getLang();
  * List of tab names.
  * @private
  */
-
-Code.TABS_ = ['blocks', 'console', 'files', 'device', 'programs', 'databoard', 'mqtt', 'iot'];
+// 'programs', 'device', 'databoard', 'iot', 'mqtt'
+Code.TABS_ = ['blocks', 'console', 'files'];
 
 Code.current = ["blocks", "", ""]
 
@@ -306,26 +306,26 @@ Code.renderContent = (_navigation) => {
     return
   let content = get(`#content_${_navigation}`)
   switch (_navigation) {
-    case "databoard":
-      // Wait 10ms because the canvas of chart.js cannot be inited while not displaying
-      setTimeout(() => {
-        if (!window.frames[3].inited) {
-          if (typeof window.frames[3].modules == 'object' && typeof window.frames[3].modules.Workspaces == 'object') {
-            window.frames[3].initDataStorage()
-          } else {
-            /** wait to databoad to load */
-            var interval = setInterval(() => {
-              if (typeof window.frames[3].modules == 'object' && typeof window.frames[3].modules.Workspaces == 'object') {
-                window.frames[3].initDataStorage()
-                if (window.frames[3].inited)
-                  clearInterval(interval)
-              }
-            }, 500)
-          }
-        } else
-          window.frames[3].initGrid()
-      }, 10)
-      break
+    // case "databoard":
+    //   // Wait 10ms because the canvas of chart.js cannot be inited while not displaying
+    //   setTimeout(() => {
+    //     if (!window.frames[3].inited) {
+    //       if (typeof window.frames[3].modules == 'object' && typeof window.frames[3].modules.Workspaces == 'object') {
+    //         window.frames[3].initDataStorage()
+    //       } else {
+    //         /** wait to databoad to load */
+    //         var interval = setInterval(() => {
+    //           if (typeof window.frames[3].modules == 'object' && typeof window.frames[3].modules.Workspaces == 'object') {
+    //             window.frames[3].initDataStorage()
+    //             if (window.frames[3].inited)
+    //               clearInterval(interval)
+    //           }
+    //         }, 500)
+    //       }
+    //     } else
+    //       window.frames[3].initGrid()
+    //   }, 10)
+    //   break
     case "blocks":
       Code.workspace.setVisible(true)
       Code.auto_mode = true
@@ -346,11 +346,11 @@ Code.renderContent = (_navigation) => {
     case "console":
       term.resize()
       break
-    case "device":
-    case "programs":
-    case "iot":
-    case "mqtt":
-      break
+    // case "device":
+    // case "programs":
+    // case "iot":
+    // case "mqtt":
+    //   break
   }
   content.focus()
 };
@@ -370,12 +370,12 @@ Code.resizeContent = (_navigation) => {
       case "console":
         term.resize()
         break
-      case "databoard":
-      case "device":
-      case "programs":
-      case "iot":
-      case "mqtt":
-        break
+      // case "databoard":
+      // case "device":
+      // case "programs":
+      // case "iot":
+      // case "mqtt":
+      //   break
     }
   })
 };
@@ -386,10 +386,10 @@ Code.resizeContent = (_navigation) => {
  */
 Code.deinitContent = (_navigation) => {
   switch (_navigation) {
-    case "databoard":
-      if (window.frames[3].grid_inited)
-        window.frames[3].deinitGrid()
-      break
+    // case "databoard":
+    //   if (window.frames[3].grid_inited)
+    //     window.frames[3].deinitGrid()
+    //   break
     case "blocks":
       Code.workspace.setVisible(false);
       Code.auto_mode = false;
@@ -545,22 +545,33 @@ Code.init = function () {
 
   Code.workspace = Blockly.inject('content_blocks',
     {
-      grid:
-      {
-        spacing: 25,
+      grid: {
+        spacing: 0,
         length: 3,
         colour: '#ccc',
         snap: true
       },
+      move: {
+        scrollbars: {
+          horizontal: true,
+          vertical: true
+        },
+        wheel: true
+      },
       media: 'media/',
+      scrollbars: false,
       rtl: rtl,
       toolbox: toolboxXml,
       oneBasedIndex: false,
-      zoom:
-      {
-        controls: true,
-        wheel: true
-      }
+      zoom: {
+        // controls: true,
+        // wheel: true
+        startScale: 0.6,
+        maxScale: 3,
+        minScale: 0.3,
+      },
+      trashcan: true, // 垃圾桶显隐
+      renderer: 'zelos', // 渲染器 'geras' 'thrasos' 'zelos'
     });
 
   Code.loadBlocks('');
@@ -807,8 +818,8 @@ Code.initLanguage = function () {
   //Changed to a fixed title for all languages - BIPES Beta
   document.getElementById('tab_blocks').textContent = MSG['blocks'];
   document.getElementById('tab_files').textContent = MSG['files'];
-  document.getElementById('tab_programs').textContent = MSG['shared'];
-  document.getElementById('tab_device').textContent = MSG['device'];
+  // document.getElementById('tab_programs').textContent = MSG['shared'];
+  // document.getElementById('tab_device').textContent = MSG['device'];
 
   document.getElementById('linkButton').title = MSG['linkTooltip'];
   document.getElementById('runButton').title = MSG['runTooltip'];
