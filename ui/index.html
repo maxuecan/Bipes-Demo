@@ -14,18 +14,13 @@
   <!-- Progressive Web Application setup -->
   <link rel="manifest" href="manifest.json">
   </link>
-  <script src="core/manup.js"></script>
+  <!-- <script src="core/manup.js"></script> -->
   <!-- End of Progressive Web Application setup -->
 
-
-
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162001686-1"></script>
-
-
+  <script src="./plugins/gtag/gtag.js"></script>
 
   <script>
-
     function setCookie(cname, cvalue, cpassword_value, exdays) {
       var d = new Date();
       d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -64,8 +59,8 @@
 
     gtag('config', 'UA-162001686-1');
   </script>
-  <link rel="stylesheet" href="style.css?ver=0.2.3.1125">
-  <link rel="stylesheet" href="core/libs.css">
+  <!-- <link rel="stylesheet" href="style.css?ver=0.2.3.1125"> -->
+  <!-- <link rel="stylesheet" href="core/libs.css"> -->
   <script src="core/storage.js?ver=0.2.2.1125"></script>
   <script src="core/blockly_compressed.js?ver=0.2.1.8260042"></script>
   <script src="core/blocks_compressed.js?ver=0.2.1.8260042"></script>
@@ -78,7 +73,6 @@
   <script src="core/queue.js"></script>
   <script src="core/FileSaver.js"></script>
   <script src="core/shortcut.js"></script>
-
 
   <!-- Custom Blocks for BIPES Project -->
   <script src="core/block_definitions.js?ver=0.2.3.11011813"></script> <!-- Rafael 24/03/2020 -->
@@ -96,29 +90,24 @@
     // This is the "Offline copy of pages" service worker
 
     /*
-     This code uses the pwa-update web component https://github.com/pwa-builder/pwa-update to register your service worker, tell the user when there is an update available and let the user know when your PWA is ready to use offline.
-    
+      This code uses the pwa-update web component https://github.com/pwa-builder/pwa-update to register your service worker, tell the user when there is an update available and let the user know when your PWA is ready to use offline.
     */
 
     import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
     const el = document.createElement('pwa-update');
     document.body.appendChild(el);
-
   </script>
 
   <!-- End of Progressive Web Application setup -->
 
-
   <!-- From https://github.com/rafaelaroca/blockly-cv2 for OpenCV  -->
   <!-- 
-  <script src="jsCv/en.js"></script>
-  <script src="jsCv/cv2.js"></script>
+    <script src="jsCv/en.js"></script>
+    <script src="jsCv/cv2.js"></script>
   -->
-  <script src="jsCv/v30.js"></script>
-  <script src="jsCv/v30/python.js"></script>
-  <script src="jsCv/v30/blocks.js"></script>
-
-
+  <script src="./plugins/jsCv/v30.js"></script>
+  <script src="./plugins/jsCv/v30/python.js"></script>
+  <script src="./plugins/jsCv/v30/blocks.js"></script>
 </head>
 
 <body>
@@ -263,12 +252,11 @@
   <div id="content_programs" class="content">
     <center>
       <!--
-    <iframe src="https://bipes-271213.appspot.com/list" width="100%" height="500" frameBorder="0"></iframe>
+        <iframe src="https://bipes-271213.appspot.com/list" width="100%" height="500" frameBorder="0"></iframe>
 	    -->
       <iframe src="shared.html" width="100%" height="500" frameBorder="0"></iframe>
     </center>
   </div>
-
 
   <!-- ################################################## -->
 
@@ -284,17 +272,12 @@
         connecto to MicroPython board using Wifi. Micropython must be previously installed on the board. Follow these
         instructions to install it.
       </label>
-
     </center>
-
   </div>
-
 
   <!-- ################################################## -->
 
   <div id="content_files" class="content">
-
-
     <div id="file-boxes">
       <div id="file-header">
         <span>File manager</span>
@@ -302,17 +285,15 @@
           title="Upload script to device"></label>
         <input name="PutFileList" id="put-file-select" type="file" accept=".md,.py" required="">
         <!--<input type="button" value="Run Blocks" onclick="Tool.runPython(); return false;" />-->
-
       </div>
       <!--<input type="button" value="Blocks to editable Python (here)" onclick="Tool.blocksToPython(); return false;" />-->
 
-
       <!--<div class="file-box">
-  <strong>Send a file</strong>
-  <input type="file" id="put-file-select" />
-  <div id="put-file-list"></div>
-  <input type="button" value="Send to device" id="put-file-button" onclick="Files.put_file(); return false;" />
-  </div>-->
+        <strong>Send a file</strong>
+        <input type="file" id="put-file-select" />
+        <div id="put-file-list"></div>
+        <input type="button" value="Send to device" id="put-file-button" onclick="Files.put_file(); return false;" />
+      </div>-->
       <div id="file-status">...</div>
       <span id='filesPanel'>
         <details open>
@@ -342,11 +323,10 @@
             <div onclick="Tool.getText('ssd1306.py');">ssd1306.py</div>
           </span>
         </details>
+      </span>
     </div>
 
-
     <div>
-
       <div id="file_save_as" class="py">
         <input type=text id=content_file_name placeholder="Filename">
         <button id="editor2DeviceButton" class="button icon text" onclick="Files.files_save_as();">Save</button>
@@ -407,258 +387,236 @@
     </details>
   </div>
 
-  <script>
+    <script>
+      // Init blockly
+      Code.init();
 
-    // Init blockly
-    Code.init();
+      /* global WebSocket, WebSerial and Bluetooth variable and functions (see core/channel.js) */
+      var Channel = {};
+      Channel['websocket'] = new websocket();
+      Channel['webserial'] = new webserial();
+      Channel['webbluetooth'] = new webbluetooth();
+      Channel['mux'] = new mux();
 
-    /* global WebSocket, WebSerial and Bluetooth variable and functions (see core/channel.js) */
-    var Channel = {};
-    Channel['websocket'] = new websocket();
-    Channel['webserial'] = new webserial();
-    Channel['webbluetooth'] = new webbluetooth();
-    Channel['mux'] = new mux();
+      //global terminal variable
+      var terminal = new Terminal();
+      term.init('#term') //init expanded class;
 
-    //global terminal variable
-    var terminal = new Terminal();
-    term.init('#term') //init expanded class;
+      //global Utilities variable and functions (see core/utils.js)
+      var Files = new files('#fileList');
 
-    //global Utilities variable and functions (see core/utils.js)
-    var Files = new files('#fileList');
-
-    // global User Interface variable and functions (see core/ui.js) */
-    var UI = {};
-    UI['responsive'] = new responsive();
-    UI['notify'] = new notify();
-    UI['progress'] = new progress();
-    UI['account'] = new account('#accountButton', '.account-panel');
-    UI['notify-panel'] = new panel('#notificationButton', '.notify-panel');
-    UI['channel-panel'] = new channelPanel('#channelButton', '.channel-panel');
-    UI['toolbar'] = new panel('#toolbarButton', '.toolbar');
-    UI['workspace'] = new workspace();
+      // global User Interface variable and functions (see core/ui.js) */
+      var UI = {};
+      UI['responsive'] = new responsive();
+      UI['notify'] = new notify();
+      UI['progress'] = new progress();
+      UI['account'] = new account('#accountButton', '.account-panel');
+      UI['notify-panel'] = new panel('#notificationButton', '.notify-panel');
+      UI['channel-panel'] = new channelPanel('#channelButton', '.channel-panel');
+      UI['toolbar'] = new panel('#toolbarButton', '.toolbar');
+      UI['workspace'] = new workspace();
 
 
-    //Make sure we wont use data from last session (BIPES serial to freeboard bridge)
-    Tool.clearQueue();
+      //Make sure we wont use data from last session (BIPES serial to freeboard bridge)
+      Tool.clearQueue();
 
-    window.onload = function () {
-      checkCookie()
-      loadPage(); //Load modal splash screen
+      window.onload = function () {
+        checkCookie()
+        loadPage(); //Load modal splash screen
 
-      //i18n
-      //Auto detect user language (from the browser)
-      var userLang = navigator.language || navigator.userLanguage + " ";
-      //alert ("The language is: " + userLang);
-      var addMsg = "";
+        //i18n
+        //Auto detect user language (from the browser)
+        var userLang = navigator.language || navigator.userLanguage + " ";
+        //alert ("The language is: " + userLang);
+        var addMsg = "";
 
-      //Also, detect language from the URL
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      pLang = urlParams.get('lang')
+        //Also, detect language from the URL
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        pLang = urlParams.get('lang')
 
-      if (!userLang)
-        userLang = 'en';
-      if (!pLang)
-        pLang = 'en';
+        if (!userLang)
+          userLang = 'en';
+        if (!pLang)
+          pLang = 'en';
 
-      if ((userLang.startsWith("pt")) || (pLang.startsWith("pt"))) {
-        addMsg = "<p><a href=/beta2/ui/?lang=pt-br>Acessar o BIPES em Português</a>";
-        addMsg += " | <a href=/beta2/ui/?lang=en>Access BIPES in English</a>";
+        if ((userLang.startsWith("pt")) || (pLang.startsWith("pt"))) {
+          addMsg = "<p><a href=/beta2/ui/?lang=pt-br>Acessar o BIPES em Português</a>";
+          addMsg += " | <a href=/beta2/ui/?lang=en>Access BIPES in English</a>";
+        }
+
+        if (MSG["splash_welcome"])
+          document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
+        else
+          document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
+
+        if (MSG["splash_message"])
+          document.getElementById("modalMsg").innerHTML = MSG["splash_message"] + addMsg;
+        else
+          document.getElementById("modalMsg").innerHTML = "<p><b>**BIPES: Block based Integrated Platform for Embedded Systems</B> allows text and block based programming for several types of embedded systems and Internet of Things modules using MicroPython, CircuitPython, Python or Snek. You can connect, program, debug and monitor several types of boards using network, USB or Bluetooth. Please check a list of <a href=https://bipes.net.br/wp/boards/>compatible boards here</a>. Compatible boards include STM32, ESP32, ESP8266, Raspberry Pi Pico and even Arduino.  <p><b>BIPES</b> is fully <a href=https://bipes.net.br/wp/development/>open source</a> and based on HTML and JavaScript, so no software install or configuration is needed and you can use it offline! We hope BIPES is useful for you and that you can enjoy using BIPES. If you need help, we now have a <a href=https://github.com/BIPES/BIPES/discussions>discussion forum</a>, where we also post <a href=https://github.com/BIPES/BIPES/discussions/categories/announcements>new features and announcements about BIPES</a>. Feel free to use it! Also, we invite you to use the forum to leave feedbacks and suggestions for BIPES!</p><p>Checkout BIPES Book: <a href=https://bipes.net.br/wp/book-livro/>https://bipes.net.br/wp/book-livro/</a></p> <p>Thank you from the BIPES Team!</p>" + addMsg;
+
+        if (MSG["splash_footer"])
+          document.getElementById("modalFooter").innerHTML = MSG["splash_footer"];
+        else
+          document.getElementById("modalFooter").innerHTML = "Do not show this screen again";
+
+        if (MSG["splash_close"])
+          document.getElementById("modalClose").innerHTML = MSG["splash_close"];
+        else
+          document.getElementById("modalClose").innerHTML = "Close";
+
+        //if (userLang.startsWith("pt")) {
+        //	//alert("pt");
+        //	document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
+        //} else {
+        //	//alert("en");
+        //	if (MSG["splash_welcome"]) {
+        //		document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
+        //	}
+        //	else {
+        //		document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
+        //	}
+        //}
+
+        //BIPES keyboad hotkeys
+        //Source: http://www.openjs.com/scripts/events/keyboard_shortcuts/
+        //Includes core/shortcut.js
+        shortcut.add("Ctrl+Shift+L", function () {
+          //alert("BIPES hotkey: screenshot!");
+          Tool.exportScreenshot();
+        });
+
+        shortcut.add("Ctrl+Shift+E", function () {
+          //alert("BIPES hotkey: Run program and switch to console!");
+          Code.handleLink('console', 1)
+          Tool.runPython();
+        });
+
+        shortcut.add("Ctrl+Shift+R", function () {
+          //alert("BIPES hotkey: Run program!");
+          Tool.runPython();
+        });
+
+        shortcut.add("Ctrl+Shift+S", function () {
+          //alert("BIPES hotkey: Stop program!");
+          Tool.stopPython();
+        });
+      };
+    </script>
+
+    <!-- Start of modal Splash Screen -->
+
+    <!-- <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
       }
 
-      if (MSG["splash_welcome"])
-        document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
-      else
-        document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
-
-      if (MSG["splash_message"])
-        document.getElementById("modalMsg").innerHTML = MSG["splash_message"] + addMsg;
-      else
-        document.getElementById("modalMsg").innerHTML = "<p><b>**BIPES: Block based Integrated Platform for Embedded Systems</B> allows text and block based programming for several types of embedded systems and Internet of Things modules using MicroPython, CircuitPython, Python or Snek. You can connect, program, debug and monitor several types of boards using network, USB or Bluetooth. Please check a list of <a href=https://bipes.net.br/wp/boards/>compatible boards here</a>. Compatible boards include STM32, ESP32, ESP8266, Raspberry Pi Pico and even Arduino.  <p><b>BIPES</b> is fully <a href=https://bipes.net.br/wp/development/>open source</a> and based on HTML and JavaScript, so no software install or configuration is needed and you can use it offline! We hope BIPES is useful for you and that you can enjoy using BIPES. If you need help, we now have a <a href=https://github.com/BIPES/BIPES/discussions>discussion forum</a>, where we also post <a href=https://github.com/BIPES/BIPES/discussions/categories/announcements>new features and announcements about BIPES</a>. Feel free to use it! Also, we invite you to use the forum to leave feedbacks and suggestions for BIPES!</p><p>Checkout BIPES Book: <a href=https://bipes.net.br/wp/book-livro/>https://bipes.net.br/wp/book-livro/</a></p> <p>Thank you from the BIPES Team!</p>" + addMsg;
-
-      if (MSG["splash_footer"])
-        document.getElementById("modalFooter").innerHTML = MSG["splash_footer"];
-      else
-        document.getElementById("modalFooter").innerHTML = "Do not show this screen again";
-
-      if (MSG["splash_close"])
-        document.getElementById("modalClose").innerHTML = MSG["splash_close"];
-      else
-        document.getElementById("modalClose").innerHTML = "Close";
-
-
-
-      //if (userLang.startsWith("pt")) {
-      //	//alert("pt");
-      //	document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
-      //} else {
-      //	//alert("en");
-      //	if (MSG["splash_welcome"]) {
-      //		document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
-      //	}
-      //	else {
-      //		document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
-      //	}
-      //}
-
-      //BIPES keyboad hotkeys
-      //Source: http://www.openjs.com/scripts/events/keyboard_shortcuts/
-      //Includes core/shortcut.js
-      shortcut.add("Ctrl+Shift+L", function () {
-        //alert("BIPES hotkey: screenshot!");
-        Tool.exportScreenshot();
-      });
-
-      shortcut.add("Ctrl+Shift+E", function () {
-        //alert("BIPES hotkey: Run program and switch to console!");
-        Code.handleLink('console', 1)
-        Tool.runPython();
-      });
-
-      shortcut.add("Ctrl+Shift+R", function () {
-        //alert("BIPES hotkey: Run program!");
-        Tool.runPython();
-      });
-
-      shortcut.add("Ctrl+Shift+S", function () {
-        //alert("BIPES hotkey: Stop program!");
-        Tool.stopPython();
-      });
-
-
-
-    };
-
-
-
-
-
-
-  </script>
-
-
-  <!--
-	Start of modal Splash Screen
--->
-
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    /* The Modal (background) */
-    .modal {
-      display: none;
-      /* Hidden by default */
-      position: fixed;
-      /* Stay in place */
-      z-index: 1000000;
-      /* Sit on top - amazing, but Blockly has z-index up to 100000*/
-      padding-top: 100px;
-      /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%;
-      /* Full width */
-      height: 100%;
-      /* Full height */
-      overflow: auto;
-      /* Enable scroll if needed */
-      background-color: rgb(0, 0, 0);
-      /* Fallback color */
-      background-color: rgba(0, 0, 0, 0.4);
-      /* Black w/ opacity */
-    }
-
-    /* Modal Content */
-    .modal-content {
-      position: relative;
-      background-color: #fefefe;
-      margin: auto;
-      padding: 0;
-      border: 1px solid #188;
-      width: 80%;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      -webkit-animation-name: animatetop;
-      -webkit-animation-duration: 0.4s;
-      animation-name: animatetop;
-      animation-duration: 0.4s
-    }
-
-    /* Add Animation */
-    @-webkit-keyframes animatetop {
-      from {
-        top: -300px;
-        opacity: 0
-      }
-
-      to {
+      /* The Modal (background) */
+      .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1000000;
+        /* Sit on top - amazing, but Blockly has z-index up to 100000*/
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
         top: 0;
-        opacity: 1
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
       }
-    }
 
-    @keyframes animatetop {
-      from {
-        top: -300px;
-        opacity: 0
+      /* Modal Content */
+      .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #188;
+        width: 80%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
       }
 
-      to {
-        top: 0;
-        opacity: 1
+      /* Add Animation */
+      @-webkit-keyframes animatetop {
+        from {
+          top: -300px;
+          opacity: 0
+        }
+
+        to {
+          top: 0;
+          opacity: 1
+        }
       }
-    }
 
-    /* The Close Button */
-    .closeM {
-      color: white;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
+      @keyframes animatetop {
+        from {
+          top: -300px;
+          opacity: 0
+        }
 
-    .closeM:hover,
-    .closeM:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
+        to {
+          top: 0;
+          opacity: 1
+        }
+      }
 
-    .modal-header {
-      padding: 2px 16px;
-      background-color: #4d4dff;
-      color: white;
-    }
+      /* The Close Button */
+      .closeM {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
 
-    .modal-body {
-      padding: 2px 16px;
-    }
+      .closeM:hover,
+      .closeM:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
 
-    .modal-footer {
-      padding: 2px 16px;
-      background-color: #4d4dff;
-      color: white;
-    }
-  </style>
+      .modal-header {
+        padding: 2px 16px;
+        background-color: #4d4dff;
+        color: white;
+      }
 
+      .modal-body {
+        padding: 2px 16px;
+      }
 
-  <!-- Trigger/Open The Modal 
-	For testing only
+      .modal-footer {
+        padding: 2px 16px;
+        background-color: #4d4dff;
+        color: white;
+      }
+    </style> -->
 
-<body onload="loadPage()">
-<button id="myBtn">Open Modal SplashScreen</button>
-
-BIPES
--->
+    <!-- Trigger/Open The Modal For testing only
+      <body onload="loadPage()">
+      <button id="myBtn">Open Modal SplashScreen</button>
+      BIPES
+    -->
   </div>
 
-
-
   <!-- The Modal -->
-  <div id="myModal" class="modal">
-
-    <!-- Modal content -->
+  <!-- <div id="myModal" class="modal">
+    Modal content
     <div class="modal-content">
       <div class="modal-header">
         <span class="closeM">&times;</span>
@@ -666,8 +624,6 @@ BIPES
       </div>
       <div class="modal-body">
         <span id="modalMsg"></span>
-
-
       </div>
       <div class="modal-footer">
 
@@ -683,96 +639,86 @@ BIPES
           <br>
       </div>
     </div>
+  </div> -->
+
+  <!-- <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    //var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("closeM")[0];
+
+    // When the user clicks the button, open the modal 
+    //btn.onclick = function() {
+    //	  modal.style.display = "block";
+    //}
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
 
 
-    <script>
-      // Get the modal
-      var modal = document.getElementById("myModal");
-
-      // Get the button that opens the modal
-      //var btn = document.getElementById("myBtn");
-
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("closeM")[0];
-
-      // When the user clicks the button, open the modal 
-      //btn.onclick = function() {
-      //	  modal.style.display = "block";
-      //}
-
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function () {
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
         modal.style.display = "none";
       }
+    }
 
+    function closeModal() {
+      modal.style.display = "none";
+    }
 
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
+    function loadPage() {
+      var x = getCookieModal('BIPES_Splash');
+      if (x) {
+        console.log('Not showing splash');
+      } else {
+        console.log('Showing splash');
+        modal.style.display = "block";
       }
+    }
 
-      function closeModal() {
-        modal.style.display = "none";
+    function doalert(checkboxElem) {
+
+      if (checkboxElem.checked) {
+        setCookieModal('BIPES_Splash', 'BIPES_SplashC', 1);
+        console.log('Modal Cookie Set');
+      } else {
+        eraseCookieModal('BIPES_Splash');
+        console.log('Modal Cookie deleted');
       }
+    }
 
-      function loadPage() {
-        var x = getCookieModal('BIPES_Splash');
-        if (x) {
-          console.log('Not showing splash');
-        } else {
-          console.log('Showing splash');
-          modal.style.display = "block";
-        }
+
+    function setCookieModal(name, value, days) {
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
       }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
 
-      function doalert(checkboxElem) {
-
-        if (checkboxElem.checked) {
-          setCookieModal('BIPES_Splash', 'BIPES_SplashC', 1);
-          console.log('Modal Cookie Set');
-        } else {
-          eraseCookieModal('BIPES_Splash');
-          console.log('Modal Cookie deleted');
-        }
+    function getCookieModal(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
       }
+      return null;
+    }
 
-
-      function setCookieModal(name, value, days) {
-        var expires = "";
-        if (days) {
-          var date = new Date();
-          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-          expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-      }
-
-      function getCookieModal(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-      }
-
-      function eraseCookieModal(name) {
-        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-      }
-
-    </script>
-
-
-
-    <!--
-	End of modal Splash Screen
--->
-
-
-
-
+    function eraseCookieModal(name) {
+      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+  </script> -->
+  <!-- End of modal Splash Screen -->
 </html>
