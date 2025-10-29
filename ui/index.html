@@ -17,7 +17,7 @@
   <!-- <script src="core/manup.js"></script> -->
   <!-- End of Progressive Web Application setup -->
 
-  <script src="./plugins/gtag/gtag.js"></script>
+  <script src="plugins/gtag/gtag.js"></script>
 
   <script>
     function setCookie(cname, cvalue, cpassword_value, exdays) {
@@ -58,12 +58,16 @@
 
     gtag('config', 'UA-162001686-1');
   </script>
-  <!-- <link rel="stylesheet" href="core/libs.css"> -->
+  <link rel="stylesheet" href="core/libs.css">
   <script src="core/storage.js?ver=0.2.2.1125"></script>
-  <script src="core/blockly_compressed.js?ver=0.2.1.8260042"></script>
+  <!-- <script src="core/blockly_compressed.js?ver=0.2.1.8260042"></script>
   <script src="core/blocks_compressed.js?ver=0.2.1.8260042"></script>
   <script src="core/javascript_compressed.js?ver=0.2.1.8260042"></script>
-  <script src="core/python_compressed.js?ver=0.2.3.9292231"></script>
+  <script src="core/python_compressed.js?ver=0.2.3.9292231"></script> -->
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+  <script src="blockly/python_compressed.js"></script>
   <script src="core/code.js?ver=0.2.3.1125"></script>
   <script src="core/channel.js?ver=0.2.3.1125"></script>
   <script src="core/utils.js?ver=0.2.3.1125"></script>
@@ -127,7 +131,7 @@
         <button class="icon" id="connectButton" title="Connect/Disconnect"></button>
       </div>
       <div class="icon" id="deviceSelect">
-        <select id="device_selector">
+        <!-- <select id="device_selector">
           <option value="AmadoBoard">Amado Board</option>
           <option value="ESP8266">ESP8266</option>
           <option value="ESP32S2">Franzininho Wifi (ESP32S2+CircuitPython)</option>
@@ -143,7 +147,7 @@
           <option value="UNO">Arduino UNO or MEGA (Snek @ 38400)</option>
           <option value="UNO2">Arduino UNO or MEGA (Snek @ 115200)</option>
           <option value="EV3">Lego EV3</option>
-        </select>
+        </select> -->
         <button id="runButton" class="notext primary icon" title="..."></button>
       </div>
 

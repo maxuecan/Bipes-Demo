@@ -182,7 +182,9 @@ account.prototype.newProject = function () {
   let emptyXML = Tool.emptyXML ();
   let uid = Tool.uid ();
   this.projects [uid] = +new Date ();
+
   localStorage.setItem('bipes_projects', JSON.stringify(this.projects))
+  console.log(333)
   localStorage.setItem (uid, emptyXML)
 
   this.currentProject.uid = uid;
@@ -476,7 +478,10 @@ class workspace {
     }
 
     this.defaultToolbox = 'default.xml';
-    this.selector = get('#device_selector');
+    this.selector = {
+      value: 'default_basic'
+    }
+    // this.selector = get('#device_selector');
     // this.content = get('#content_device');
     this.toolbarButton = get('#toolbarButton');
     this.channel_connect = get('#channel_connect');
@@ -490,7 +495,7 @@ class workspace {
       if (!/#(.)/.test(window.location.href)) // checks if there is a file to be loaded
         this.change ();
     });
-    this.selector.onchange = () => {this.change ()};
+    // this.selector.onchange = () => {this.change ()};
 
     this.websocket = {url:get('#url'), pass:get('#password')};
     this.runButton = {
@@ -587,9 +592,8 @@ workspace.prototype.runAbort = function () {
  * and :js:attr:`webserial#speed` with the target device info.
  */
 workspace.prototype.change = function () {
-
   if (this.selector.value in this.devices) {
-    let selected = this.devices [this.selector.value];
+    let selected = this.devices ['default_basic'];
     // this.device_title.innerHTML = selected.title,
     // this.device_img.src = selected.img,
     // this.device_desc.innerHTML = selected.description;

@@ -58,6 +58,7 @@ BlocklyStorage.restoreBlocks = function(opt_workspace) {
       }
     } else {
       let uid = Tool.uid ();
+      console.log(123)
       localStorage.setItem (uid, Tool.emptyXML ())
       let emptyProject = `{"${uid}":"${+new Date}"}`;
       localStorage.setItem('bipes_projects', emptyProject)

@@ -181,6 +181,14 @@ module.exports = {
                 {
                     from: path.resolve(__dirname, 'media'),
                     to: 'media'
+                },
+                {
+                    from: path.resolve(__dirname, 'toolbox'),
+                    to: 'toolbox' 
+                },
+                {
+                    from: path.resolve(__dirname, 'blockly'),
+                    to: 'blockly' 
                 }
             ]
         })

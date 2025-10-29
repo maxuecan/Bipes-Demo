@@ -163,7 +163,8 @@ Code.bindClick = function (el, func) {
  */
 Code.importPrettify = function () {
   var script = document.createElement('script');
-  script.setAttribute('src', 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js');
+  // script.setAttribute('src', 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js');
+  script.setAttribute('src', 'plugins/code-prettify/run_prettify.js');
   document.head.appendChild(script);
 };
 
@@ -420,11 +421,13 @@ Code.toDOM = function (code, prettyPrintType, domTarget) {
  * @param generator {!Blockly.Generator} The generator to use.
  */
 Code.checkAllGeneratorFunctionsDefined = function (generator) {
-  var blocks = Code.workspace.getAllBlocks();
+  var blocks = Code.workspace.getAllBlocks(false);
+
   var missingBlockGenerators = [];
   for (var i = 0; i < blocks.length; i++) {
     var blockType = blocks[i].type;
-    if (!generator[blockType]) {
+    // if (!generator[blockType]) {
+    if (!generator.forBlock[blockType]) {
       if (missingBlockGenerators.indexOf(blockType) === -1) {
         missingBlockGenerators.push(blockType);
       }
@@ -511,8 +514,6 @@ Code.generateXML = function (workspace = Code.workspace) {
   return UI['workspace'].writeWorkspace(xmlText, true);
 }
 
-
-
 /**
  * Initialize Blockly.  Called on page load.
  */
@@ -546,7 +547,7 @@ Code.init = function () {
   Code.workspace = Blockly.inject('content_blocks',
     {
       grid: {
-        spacing: 0,
+        spacing: 50,
         length: 3,
         colour: '#ccc',
         snap: true
@@ -564,8 +565,8 @@ Code.init = function () {
       toolbox: toolboxXml,
       oneBasedIndex: false,
       zoom: {
-        // controls: true,
-        // wheel: true
+        controls: true,
+        wheel: true,
         startScale: 0.6,
         maxScale: 3,
         minScale: 0.3,
