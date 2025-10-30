@@ -3,12 +3,13 @@ html, body {
 }
 
 body {
-  background-color: #fff;
+  background-color: #f8fafc;
   font-family: sans-serif;
   margin: 0;
   overflow: hidden;
   overscroll-behavior: none; /*disable pull to refresh */
   font-family: BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #334155;
 }
 
 label {
@@ -34,21 +35,23 @@ tt {
 
 /* Buttons */
 button.icon, label.button.icon {
-  border-radius: 2rem;
+  border-radius: 12px;
   border: 1px solid transparent;
   background-color: transparent;
-  color: #000;
+  color: #334155;
   padding: .25rem;
-  transition: border-color ease .125s;
+  transition: all 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
 }
 button.icon:hover, label.button.icon:hover {
-  border: 1px solid #aaa;
+  border: 1px solid #cbd5e1;
+  background-color: #f1f5f9;
 }
 
 button.icon:active, label.button.icon:active {
-  border-color: #000;
+  border-color: #64748b;
+  background-color: #e2e8f0;
 }
 button.disabled:hover {
   opacity: 0.6;
@@ -84,7 +87,9 @@ h1 {
   user-select: none;
   width: 100vw;
   box-sizing: border-box;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .top-menu > .logo {
   display: flex;
@@ -92,7 +97,7 @@ h1 {
   font-size: 2rem;
   font-weight: 600;
   line-height: 1.125;
-  color: #3298dc;
+  color: #3b82f6;
 }
 
 .top-menu > .logo:before  {
@@ -154,17 +159,17 @@ h1 {
   align-items: center;
   justify-content: center;
   width: 18.5rem;
-  transition: .125s ease top, .125s ease opacity, .125s ease transform;
-  background: #fff;
-  border-radius: 1.5em;
-  padding: 0.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0.5rem;
   top:  -15rem;
   right: 22rem;
   margin-right: 0;
-  border: 1px solid #aaa;
-  box-shadow: 0em 0em 0.5em rgba(0,0,0,0.5);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
   opacity: 0;
-  transform: scale(0.5);
+  transform: scale(0.95);
 }
 .channel-panel#show{
   top: .25rem;
@@ -212,10 +217,11 @@ h1 {
 }
 .channel-panel > div {
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
   text-align: end;
   width: 100%;
+  margin-bottom: 0.5rem;
 }
 #closeZone {
   position: absolute;
@@ -242,16 +248,17 @@ input.checkswitch[type="checkbox"] {
     display: none;
 }
 .checkswitch input:checked ~ span {
-    background: #3298dc;
+    background: #3b82f6;
 }
 .checkswitch span {
     width: 2.5em;
     height: 1.5em;
-    background: grey;
+    background: #d1d5db;
     display: inline-block;
     border-radius: 1.5em;
     position: relative;
     line-height: 1.5rem;
+    transition: background-color 0.3s ease;
 }
 .checkswitch span::after {
     content: "";
@@ -262,8 +269,8 @@ input.checkswitch[type="checkbox"] {
     height: 1.35em;
     background: rgb(255, 255, 255);
     border-radius: 1.35em;
-    transition: left 0.25s ease-out 0s, transform 0.25s ease-out 0s;
-    box-shadow: rgb(0 0 0 / 20%) 0px 1px 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .checkswitch input:checked ~ span::after {
     left: -0.27em;
@@ -299,7 +306,7 @@ input.checkswitch[type="checkbox"] {
 }
 @keyframes blinking {
 		0%		{ background-color: #fff;}
-		50%	 { background-color: #6aa8fb;}
+		50%	 { background-color: #dbeafe;}
 		100%	 { background-color: #fff;}
 }
 #networkButton, #serialButton {
@@ -315,10 +322,11 @@ input.checkswitch[type="checkbox"] {
 .tabs > div {
   min-width: auto !important;
   padding: 0.75rem .75rem;
-  transition: box-shadow ease .125s, background-color linear .125s, border-color linear .125s, color linear .125s;
+  transition: all 0.2s ease;
   margin: 0 0.125rem;
-  border-radius: .25rem;
-  border: 1px solid #fff;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: transparent;
 }
 @media (max-width:88rem) {
   .tabs > div {
@@ -327,21 +335,23 @@ input.checkswitch[type="checkbox"] {
   }
 }
 .tabs > div.on {
-  box-shadow: 0 .125em .5em #ccc;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
   white-space: nowrap;
-  background: #3298dc;
+  background: #3b82f6;
   color: #fff;
-  border-color: #3298dc;
+  border-color: #3b82f6;
 }
 .tabs > div {
   cursor: pointer;
 }
 .tabs > div:hover {
-  border-color: #3298dc;
-  color: #3298dc;
+  border-color: #93c5fd;
+  color: #3b82f6;
+  background-color: #f9fafb;
 }
 .tabs > div.on:hover {
   color: #fff !important;
+  background-color: #2563eb;
 }
 table {
   border-collapse: collapse;
@@ -408,9 +418,7 @@ pre.content {
   border: 1px solid #ccc;
   overflow: scroll;
 }
-{
-  padding: 0;
-}
+
 #content_blocks, #content_device, #content_code, #content_console, #content_files, #content_device, #content_programs, #content_mqtt, #content_iot, #content_databoard {
   height: calc(100vh - 3.5rem);
 }
@@ -450,22 +458,30 @@ pre.content {
 }
 #content_console #term{
   padding: 0.5em;
-  background: #000;
+  background: #1e293b;
   margin: .75rem 0;
   overflow: hidden;
-  border-radius: .5rem;
-  transition: box-shadow ease .125s;
-  box-shadow: 0 0.125rem .25rem rgba(0,0,0,.5);
+  border-radius: 10px;
+  transition: box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
   overscroll-behavior: none; /*disable chrome pull to refresh */
+  border: 1px solid #334155;
 }
 #tipsGeneric, #languageIcon {
   display: inline-flex;
   align-items: center;
-  border: 1px solid #aaa;
+  border: 1px solid #e2e8f0;
   padding: .5rem;
-  border-radius: 2rem;
+  border-radius: 12px;
   opacity: 0.8;
   margin: .5rem 0;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+#tipsGeneric:hover, #languageIcon:hover {
+  border-color: #cbd5e1;
+  opacity: 1;
 }
 #languageIcon {
   border: none;
@@ -474,7 +490,7 @@ pre.content {
   margin-right: .25rem;
 }
 #content_console #term.on{
-  box-shadow: -0.25rem 0rem .75rem #6aa8fb, .25rem .25rem .75rem #7b49ad;
+  box-shadow: -0.25rem 0rem .75rem rgba(106, 168, 251, 0.3), .25rem .25rem .75rem rgba(123, 73, 173, 0.3);
 }
 #content_console button {
   line-height: 1.5rem;
@@ -562,12 +578,20 @@ pre.content {
   align-items: stretch;
   justify-content: space-between;
   margin: 0.25rem 0;
-  padding: 0.25rem;
-  border-radius: .25rem;
-  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
   cursor: pointer;
   min-height: 2rem;
   font-size: 0.9rem;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+}
+
+#fileList > div:hover, #fileTemplate > div:hover, #blocks2Code > div:hover, #ProjectList > div:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 #fileList > div > div:last-child, #ProjectList > div > div:last-child{
   flex-shrink: 0;
@@ -628,10 +652,10 @@ pre.content {
   transition: box-shadow ease .125s, background-color linear .125s, border-color linear .125s, color linear .125s;
 }
 #ProjectList > .current {
-    box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.2);
-    background: #3298dc;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    background: #3b82f6;
     color: #fff;
-    border-color: #3298dc;
+    border-color: #3b82f6;
 }
 #ProjectList .current span {
   filter: invert(1);
@@ -722,9 +746,9 @@ button.icon.medium:before  {
   height: 2.5rem;
   background-size: auto 5rem;
 }
-#linkButton:before {
-  background-position: left calc(-1.5rem*0) top; /* icon size * index on icons.svg*/
-}
+/* #linkButton:before {
+  background-position: left calc(-1.5rem*0) top;
+} */
 #saveButton:before, #downloadIcon:before  {
   background-position: left calc(-1.5rem*1) top;
 }
@@ -762,9 +786,9 @@ button.icon.medium:before  {
 #toolbarButton.on:before {
   background-position: left calc(-2.5rem*11) bottom;
 }
-#forumButton:before {
+/* #forumButton:before {
   background-position: left calc(-1.5rem*12) top;
-}
+} */
 #bluetoothButton:before, #channelButton.webbluetooth:before {
   background-position: left calc(-1.5rem*15) top;
 }
@@ -810,9 +834,15 @@ button.icon.medium:before  {
 #deviceSelect {
   display: inline-flex;
   align-items: center;
-  border: 1px solid #327ae7;
-  border-radius: 2rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
   padding-left: .5rem;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+}
+
+#deviceSelect:hover {
+  border-color: #93c5fd;
 }
 #device_selector {
   /* A reset of styles of select object */
@@ -825,9 +855,9 @@ button.icon.medium:before  {
   font-size: inherit;
   line-height: inherit;
   height: 2rem;
-  color: #327ae7;
+  color: #3b82f6;
   font-size: 0.8rem;
-  font-weight: bold;
+  font-weight: 500;
 }
 #device_selector:focus {
   color: #000;
@@ -840,15 +870,17 @@ button.icon.medium:before  {
 /* Run button */
 #runButton {
   border: none;
-  border: 1px solid #327ae7;
+  border: 1px solid #3b82f6;
   margin: -1px;
   opacity: 1;
   padding: 0.25rem .4rem;
   background: #fff;
-  transition: box-shadow ease .125s;
+  transition: all 0.2s ease;
+  border-radius: 8px;
 }
 #runButton:hover {
-  box-shadow: -1px 0 3px  #327ae7;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+  background-color: #eff6ff;
 }
 
 /* Privacy link */
@@ -859,12 +891,18 @@ button.icon.medium:before  {
 }
 
 #languageMenu {
-  border: none;
+  border: 1px solid #e2e8f0;
   height: 2rem;
   width:100%;
-  border-radius: 1rem;
-  background: #fff;
+  border-radius: 8px;
+  background: #ffffff;
   padding: .25em;
+  transition: all 0.2s ease;
+}
+
+#languageMenu:focus {
+  border-color: #93c5fd;
+  outline: none;
 }
 .account-panel, .notify-panel, .notify {
   user-select: none;
@@ -906,19 +944,20 @@ button.icon.medium:before  {
 	border-radius: .25rem;
 }
 .notify-panel > span {
-  background: #fff;
+  background: #ffffff;
 	padding: 1em;
 	display: flex;
 	align-items:center;
 	justify-content: space-between;
 	margin: .25rem 0;
-	transition: box-shadow ease .125s;
+	transition: all 0.2s ease;
 	box-sizing: border-box;
-	border: solid 1px #ccc;
+	border: solid 1px #e2e8f0;
+  border-radius: 8px;
 }
 .notify-panel > span:hover {
-  border-color: #aaa;
-	box-shadow: 0 1px 2px rgba(0,0,0,.4);
+  border-color: #cbd5e1;
+	box-shadow: 0 2px 4px rgba(0,0,0,.05);
 }
 .notify-panel > span > span {
   cursor: pointer;
@@ -977,7 +1016,8 @@ button.icon.medium:before  {
 	content: '';
 	position: absolute;
 	height: 100%;
-	background: #3298dc;
+	background: #3b82f6;
+  border-radius: 2px;
 }
 .progress-bar div{
 	width: 0%;

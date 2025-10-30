@@ -113,8 +113,8 @@
     <div class="logo">BIPES</div>
     <div class="tabs">
       <div id="tab_blocks" class="tabon">...</div>
-      <div id="tab_console" class="taboff">Console</div>
-      <div id="tab_files" class="taboff">...</div>
+      <div id="tab_console" class="taboff">终端输出</div>
+      <div id="tab_files" class="taboff">文件</div>
       <!-- <div id="tab_programs" class="taboff">...</div> -->
       <!-- <div id="tab_device" class="taboff">...</div> -->
       <!-- <div id="tab_iot" class="taboff">IOT</div> -->
@@ -150,21 +150,17 @@
         </select> -->
         <button id="runButton" class="notext primary icon" title="..."></button>
       </div>
-
-      <button id="linkButton" class="notext icon" title="..."></button>
-
       <button id="saveButton" class="notext icon" title="..."></button>
 
       <label id="loadButton" for="loadXML" class="notext button icon" title="..."></label>
       <input name="XML" id="loadXML" type="file" accept=".xml" required="">
 
-      <!--<button id="trashButton" class="notext icon" title="..."></button>-->
-
       <button id="notificationButton" class="notext icon" title="..."></button>
 
-      <button id="forumButton" class="notext icon" title="..."></button>
-
-      <button id="accountButton" class="notext icon" title="..."></button>
+      <!-- <button id="linkButton" class="notext icon" title="..."></button> -->
+      <!--<button id="trashButton" class="notext icon" title="..."></button>-->
+      <!-- <button id="forumButton" class="notext icon" title="..."></button> -->
+      <!-- <button id="accountButton" class="notext icon" title="..."></button> -->
     </div>
   </div>
 
@@ -245,7 +241,6 @@
   </div>
 
   <!-- ################################################## -->
-
   <div id="content_files" class="content">
     <div id="file-boxes">
       <div id="file-header">
@@ -311,32 +306,10 @@
   </div>
 
   <!-- ################################################## -->
-
   </div>
   <div class='progress-bar'></div>
   <div class="notify"></div>
   <div class="notify-panel"></div>
-  <div class="account-panel">
-    <span>
-      <span id="account_header">Hello, <span id="account_user" role="textbox" contenteditable>User</span>!</span>
-      <details open>
-        <summary>
-          <h2>Projects</h2>
-          <button value="New Project" id="newProjectButton" class="notext button icon" title="Create new project"
-            onclick="/*UI ['workspace'].newProject();*/" /></button>
-        </summary>
-        <span id='ProjectList'></span>
-      </details>
-    </span>
-    <details open>
-      <summary>
-        <h2>Settings</h2>
-      </summary>
-      <span class="icon" id="languageIcon">
-        <select id="languageMenu"></select>
-      </span>
-    </details>
-  </div>
 
   <div>
     <script>
@@ -362,7 +335,7 @@
       UI['responsive'] = new responsive();
       UI['notify'] = new notify();
       UI['progress'] = new progress();
-      UI['account'] = new account('#accountButton', '.account-panel');
+      // UI['account'] = new account('#accountButton', '.account-panel');
       UI['notify-panel'] = new panel('#notificationButton', '.notify-panel');
       UI['channel-panel'] = new channelPanel('#channelButton', '.channel-panel');
       UI['toolbar'] = new panel('#toolbarButton', '.toolbar');
@@ -565,6 +538,28 @@
       BIPES
     -->
   </div>
+
+  <!-- <div class="account-panel">
+    <span>
+      <span id="account_header">Hello, <span id="account_user" role="textbox" contenteditable>User</span>!</span>
+      <details open>
+        <summary>
+          <h2>Projects</h2>
+          <button value="New Project" id="newProjectButton" class="notext button icon" title="Create new project"
+            onclick="UI ['workspace'].newProject();"></button>
+        </summary>
+        <span id='ProjectList'></span>
+      </details>
+    </span>
+    <details open>
+      <summary>
+        <h2>Settings</h2>
+      </summary>
+      <span class="icon" id="languageIcon">
+        <select id="languageMenu"></select>
+      </span>
+    </details>
+  </div> -->
 
   <!-- ################################################## -->
   <!-- <div id="content_mqtt" class="content" style="padding: 0;">

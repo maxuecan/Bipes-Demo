@@ -62,7 +62,7 @@ Code.getLang = function () {
   var lang = Code.getStringParamFromUrl('lang', '');
   if (Code.LANGUAGE_NAME[lang] === undefined) {
     // Default to English.
-    lang = 'en';
+    lang = 'zh-hans';
   }
   return lang;
 };
@@ -88,33 +88,33 @@ Code.loadBlocks = function (defaultXml) {
     var loadOnce = null;
   }
   // wait to devices to load
-  var interval_ = setInterval(() => {
-    if (typeof UI != 'undefined' && UI['workspace'].devices.constructor.name == 'Object') {
-      if ('BlocklyStorage' in window && window.location.hash.length > 1) {
-        BlocklyStorage.restoreBlocks();
-        // An href with #key trigers an AJAX call to retrieve saved blocks.
-        BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-      } else if (loadOnce) {
-        // Language switching stores the blocks during the reload.
-        delete window.sessionStorage.loadOnceBlocks;
-        var xml = Blockly.Xml.textToDom(loadOnce);
-        Blockly.Xml.domToWorkspace(xml, Code.workspace);
-      } else if (defaultXml) {
-        // Load the editor with default starting blocks.
-        var xml = Blockly.Xml.textToDom(defaultXml);
-        Blockly.Xml.domToWorkspace(xml, Code.workspace);
-      } else if ('BlocklyStorage' in window) {
-        // Restore saved blocks in a separate thread so that subsequent
-        // initialization is not affected from a failed load.
-        if (typeof UI != 'undefined' && UI['workspace'].devices.constructor.name == 'Object') {
-          window.setTimeout(() => { BlocklyStorage.restoreBlocks(); UI['account'].openLastEdited() }, 0);
-        } else {
-          window.setTimeout(() => { BlocklyStorage.restoreBlocks(); UI['account'].openLastEdited() }, 0);
-        }
-      }
-      clearInterval(interval_);
-    }
-  }, 500);
+  // var interval_ = setInterval(() => {
+  //   if (typeof UI != 'undefined' && UI['workspace'].devices.constructor.name == 'Object') {
+  //     if ('BlocklyStorage' in window && window.location.hash.length > 1) {
+  //       BlocklyStorage.restoreBlocks();
+  //       // An href with #key trigers an AJAX call to retrieve saved blocks.
+  //       BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+  //     } else if (loadOnce) {
+  //       // Language switching stores the blocks during the reload.
+  //       delete window.sessionStorage.loadOnceBlocks;
+  //       var xml = Blockly.Xml.textToDom(loadOnce);
+  //       Blockly.Xml.domToWorkspace(xml, Code.workspace);
+  //     } else if (defaultXml) {
+  //       // Load the editor with default starting blocks.
+  //       var xml = Blockly.Xml.textToDom(defaultXml);
+  //       Blockly.Xml.domToWorkspace(xml, Code.workspace);
+  //     } else if ('BlocklyStorage' in window) {
+  //       // Restore saved blocks in a separate thread so that subsequent
+  //       // initialization is not affected from a failed load.
+  //       if (typeof UI != 'undefined' && UI['workspace'].devices.constructor.name == 'Object') {
+  //         window.setTimeout(() => { BlocklyStorage.restoreBlocks(); UI['account'].openLastEdited() }, 0);
+  //       } else {
+  //         window.setTimeout(() => { BlocklyStorage.restoreBlocks(); UI['account'].openLastEdited() }, 0);
+  //       }
+  //     }
+  //     clearInterval(interval_);
+  //   }
+  // }, 500);
 };
 
 /**
@@ -454,7 +454,6 @@ Code.reloadToolbox = function (XML_) {
 }
 
 function loadExampleFromURL(pName) {
-
   var request = new XMLHttpRequest();
   request.open('GET', '/beta2/ui/examples/' + pName + '.xml', true);
   //request.open('GET', 'http://bipes.net.br/beta2/ui/examples/' + pName + '.xml', true);
@@ -588,24 +587,23 @@ Code.init = function () {
   //    function() {Code.discard(); Code.renderContent();});
 
 
-  Code.bindClick('forumButton',
-    function () { window.open("https://github.com/BIPES/BIPES/discussions", '_blank') }
-  )
-
-
+  // Code.bindClick('forumButton',
+  //   function () { window.open("https://github.com/BIPES/BIPES/discussions", '_blank') }
+  // )
 
   // Disable the link button if page isn't backed by App Engine storage.
-  var linkButton = document.getElementById('linkButton');
+  // var linkButton = document.getElementById('linkButton');
   if ('BlocklyStorage' in window) {
     BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
     BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
     BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
     BlocklyStorage['XML_ERROR'] = MSG['xmlError'];
-    Code.bindClick(linkButton,
-      function () { BlocklyStorage.link(Code.workspace); });
-  } else if (linkButton) {
-    linkButton.className = 'disabled';
-  }
+    // Code.bindClick(linkButton,
+    //   function () { BlocklyStorage.link(Code.workspace); });
+  } 
+  // else if (linkButton) {
+  //   linkButton.className = 'disabled';
+  // }
 
   // Bind left click/tap and right click on tabs
   for (var i = 0; i < Code.TABS_.length; i++) {
@@ -688,7 +686,6 @@ print('Install done.')
 
   });
 
-
   Code.workspace.registerButtonCallback('loadExample', function (button) {
 
     var tmp = button.text_.split(":")[1];
@@ -712,7 +709,6 @@ print('Install done.')
     }
 
   });
-
 
   Code.workspace.registerButtonCallback('loadDoc', function (button) {
 
@@ -751,12 +747,6 @@ print('Install done.')
 
   });
 
-
-
-
-
-
-
   // Lazy-load the syntax-highlighting.
   window.setTimeout(Code.importPrettify, 1);
 };
@@ -776,9 +766,6 @@ function loadDoc() {
   win.focus();
 
 }
-
-
-
 
 /**
  * Initialize the page language.
@@ -802,36 +789,36 @@ Code.initLanguage = function () {
   };
   languages.sort(comp);
   // Populate the language selection menu.
-  var languageMenu = document.getElementById('languageMenu');
-  languageMenu.options.length = 0;
-  for (var i = 0; i < languages.length; i++) {
-    var tuple = languages[i];
-    var lang = tuple[tuple.length - 1];
-    var option = new Option(tuple[0], lang);
-    if (lang == Code.LANG) {
-      option.selected = true;
-    }
-    languageMenu.options.add(option);
-  }
-  languageMenu.addEventListener('change', Code.changeLanguage, true);
+  // var languageMenu = document.getElementById('languageMenu');
+  // languageMenu.options.length = 0;
+  // for (var i = 0; i < languages.length; i++) {
+  //   var tuple = languages[i];
+  //   var lang = tuple[tuple.length - 1];
+  //   var option = new Option(tuple[0], lang);
+  //   if (lang == Code.LANG) {
+  //     option.selected = true;
+  //   }
+  //   languageMenu.options.add(option);
+  // }
+  // languageMenu.addEventListener('change', Code.changeLanguage, true);
 
   // Inject language strings.
   //Changed to a fixed title for all languages - BIPES Beta
   document.getElementById('tab_blocks').textContent = MSG['blocks'];
-  document.getElementById('tab_files').textContent = MSG['files'];
-  // document.getElementById('tab_programs').textContent = MSG['shared'];
-  // document.getElementById('tab_device').textContent = MSG['device'];
-
-  document.getElementById('linkButton').title = MSG['linkTooltip'];
   document.getElementById('runButton').title = MSG['runTooltip'];
-  //document.getElementById('trashButton').title = MSG['trashTooltip'];
   document.getElementById('saveButton').title = MSG['saveTooltip'];
   document.getElementById('loadButton').title = MSG['loadTooltip'];
   document.getElementById('notificationButton').title = MSG['notificationTooltip'];
-  document.getElementById('languageIcon').title = MSG['languageTooltip'];
   document.getElementById('toolbarButton').title = MSG['toolbarTooltip'];
-  document.getElementById('forumButton').title = MSG['forumTooltip'];
-  document.getElementById('accountButton').title = MSG['accountTooltip'];
+
+  // document.getElementById('languageIcon').title = MSG['languageTooltip'];
+  // document.getElementById('forumButton').title = MSG['forumTooltip'];
+  // document.getElementById('linkButton').title = MSG['linkTooltip'];
+  // document.getElementById('trashButton').title = MSG['trashTooltip'];
+  // document.getElementById('tab_files').textContent = MSG['files'];
+  // document.getElementById('tab_programs').textContent = MSG['shared'];
+  // document.getElementById('tab_device').textContent = MSG['device'];
+  // document.getElementById('accountButton').title = MSG['accountTooltip'];
 };
 
 /**

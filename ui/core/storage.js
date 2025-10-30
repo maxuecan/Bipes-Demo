@@ -47,7 +47,7 @@ BlocklyStorage.backupOnUnload = function(opt_workspace) {
  */
 BlocklyStorage.restoreBlocks = function(opt_workspace) {
   if ('localStorage' in window) {
-    var workspace = opt_workspace || Blockly.getMainWorkspace();
+    // var workspace = opt_workspace || Blockly.getMainWorkspace();
     /** Import project list*/
     if (localStorage['bipes_projects'] && localStorage['bipes_projects'] != '[]') {
       try {
@@ -57,12 +57,11 @@ BlocklyStorage.restoreBlocks = function(opt_workspace) {
         UI ['notify'].log(e)
       }
     } else {
-      let uid = Tool.uid ();
-      console.log(123)
-      localStorage.setItem (uid, Tool.emptyXML ())
-      let emptyProject = `{"${uid}":"${+new Date}"}`;
-      localStorage.setItem('bipes_projects', emptyProject)
-      UI ['account'].restoreProjects (JSON.parse(emptyProject));
+      // let uid = Tool.uid ();
+      // localStorage.setItem (uid, Tool.emptyXML ())
+      // let emptyProject = `{"${uid}":"${+new Date}"}`;
+      // localStorage.setItem('bipes_projects', emptyProject)
+      // UI ['account'].restoreProjects (JSON.parse(emptyProject));
     }
   }
 };
