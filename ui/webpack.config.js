@@ -55,16 +55,7 @@ console.log('环境参数：',process.env.NODE_BASE_URL)
 module.exports = {
   // entry: './index.js',
   entry: {
-    index: './index.js',
-    'device-config': './default-config/device-config.js',
-    'search-device-dialog': './components/search-device-dialog.js',
-    // 'select-device-dialog': './components/select-device-dialog.js',
-    'camera-dialog': './components/camera-dialog.js',
-    'media-save-dialog': '/components/media-save-dialog.js',
-    'file-manage-dialog': './components/file-manage-dialog.js',
-    'file-manage-edit-dialog': './components/file-manage-edit-dialog.js',
-    'file-list': './components/file-list.js',
-    'find-code': './components/find-code.js'
+    index: './index.js'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -77,6 +68,7 @@ module.exports = {
     assetModuleFilename: 'media/[hash:10][ext][query]',
     // 自动清空上次打包的内容
     // 原理：在打包前，将path整个目录内容清空，再进行打包
+    publicPath: '/',
     clean: true
   },
   module: {
@@ -89,7 +81,7 @@ module.exports = {
           },
           {
             test: /\.(png|jpe?g|gif|webp|svg)$/,
-            type: 'asset',
+            type: 'asset/resource',
             parser: {
               dataUrlCondition: {
                 // 小于10kb的图片转base64
@@ -162,8 +154,8 @@ module.exports = {
       template: path.resolve(__dirname, './index.html')
     }),
     new MiniCssExtractPlugin({
-      filename: 'style.css',
-      chunkFilename: 'style.chunk.css'
+      filename: 'bipes-style.css',
+      chunkFilename: 'bipes-style.chunk.css'
     }),
     new PreloadWebpackPlugin({
       rel: 'preload',
@@ -175,20 +167,12 @@ module.exports = {
           from: path.resolve(__dirname, 'core'),
           to: 'core'
         },
-        {
-          from: path.resolve(__dirname, 'pylibsBlobs'),
-          to: 'pylibsBlobs',
-          transform(content, path) {  
-            return content;  
-          },  
-        },
         // {
-        //   from: path.resolve(__dirname, 'jsCv'),
-        //   to: 'jsCv'
-        // },
-        // {
-        //   from: path.resolve(__dirname, 'jq'),
-        //   to: 'jq'
+        //   from: path.resolve(__dirname, 'pylibsBlobs'),
+        //   to: 'pylibsBlobs',
+        //   transform(content, path) {  
+        //     return content;  
+        //   },  
         // },
         {
           from: path.resolve(__dirname, 'plugins'),
@@ -203,9 +187,6 @@ module.exports = {
           to: 'b'
         },
         {
-          from: path.resolve(__dirname, 'shared.html'),
-        },
-        {
           from: path.resolve(__dirname, 'manifest.json')
         },
         {
@@ -213,25 +194,17 @@ module.exports = {
           to: 'toolbox' 
         },
         {
-          from: path.resolve(__dirname, 'code-prettify'),
-          to: 'code-prettify'
-        },
-        {
           from: path.resolve(__dirname, 'blockly'),
           to: 'blockly'
         },
         {
-          from: path.resolve(__dirname, 'static'),
-          to: 'static'
+          from: path.resolve(__dirname, 'devinfo'),
+          to: 'devinfo'
+        },
+        {
+            from: path.resolve(__dirname, 'bipesStyle.css'),
+            to: 'bipesStyle.css' 
         }
-        // {
-        //   from: path.resolve(__dirname, 'devinfo'),
-        //   to: 'devinfo'
-        // },
-        // {
-        //   from: path.resolve(__dirname, 'jsTree'),
-        //   to: 'jsTree'
-        // }
       ]
     }),
     new webpack.DefinePlugin(

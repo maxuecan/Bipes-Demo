@@ -189,6 +189,10 @@ module.exports = {
                 {
                     from: path.resolve(__dirname, 'blockly'),
                     to: 'blockly' 
+                },
+                {
+                    from: path.resolve(__dirname, 'bipesStyle.css'),
+                    to: 'bipesStyle.css' 
                 }
             ]
         })
