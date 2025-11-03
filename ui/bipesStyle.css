@@ -106,7 +106,7 @@ h1 {
   width: 2rem;
   height: 2rem;
   background-size: cover;
-  background-image: url('../public/icons.svg');
+  background-image: url('./media/icons.svg');
   background-size: auto 4rem;
   background-position: left calc(-2rem*8) top; /* heigth * index in icons.svg */
 }
@@ -729,7 +729,7 @@ pre.content {
 button.icon:before, #deviceSelect.icon:before, a.icon:before, span.icon:before, label.icon:before {
   content:"";
   background-size: cover;
-  background-image: url('../public/icons.svg');
+  background-image: url('./media/icons.svg');
   width: 1.5rem;
   height: 1.5rem;
   background-size: auto 3rem;
