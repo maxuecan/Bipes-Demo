@@ -30,7 +30,6 @@
     function getCookie(cname) {
       var name = cname + "=";
       var ca = document.cookie.split(';');
-      console.log(ca)
       for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
@@ -58,7 +57,7 @@
 
     gtag('config', 'UA-162001686-1');
   </script>
-  <link rel="stylesheet" href="./bipesStyle.css">
+  <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="core/libs.css">
   <script src="core/storage.js?ver=0.2.2.1125"></script>
   <!-- <script src="core/blockly_compressed.js?ver=0.2.1.8260042"></script>
@@ -107,6 +106,9 @@
   <script src="./plugins/jsCv/v30.js"></script>
   <script src="./plugins/jsCv/v30/python.js"></script>
   <script src="./plugins/jsCv/v30/blocks.js"></script>
+
+  <!-- Jquery -->
+  <script src="./plugins/jquery/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -158,6 +160,8 @@
 
       <button id="notificationButton" class="notext icon" title="..."></button>
 
+      <div id="codePreviewButton" title="查看代码预览"></div>
+      <!-- <button id="codePreviewButton" class="notext icon" title="查看代码预览"></button> -->
       <!-- <button id="linkButton" class="notext icon" title="..."></button> -->
       <!--<button id="trashButton" class="notext icon" title="..."></button>-->
       <!-- <button id="forumButton" class="notext icon" title="..."></button> -->
@@ -239,6 +243,11 @@
         </label>
       </td>
     </tr>
+  </div>
+
+  <!-- 代码预览 -->
+  <div class="code-preview">
+    <textarea name="code" id="code-preview"></textarea>
   </div>
 
   <!-- ################################################## -->

@@ -1045,3 +1045,29 @@ button.icon.medium:before  {
     font-weight: bold;
     padding-bottom: .125rem;
 }
+
+#codePreviewButton {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 5px 0 0 5px;
+  background: url(./media/new-icon/code.png) center / cover;
+  background-size: 100%;
+  cursor: pointer;
+}
+.code-preview {
+  visibility: hidden;
+  position: absolute;
+  top: 3.5rem;
+  right: 10px;
+  width: 479px;
+  height: 100%;
+  background: white;
+  box-shadow: 0px 0px 15px 2px #EFEEE9;
+  z-index: 1;
+}
+.code-preview > .CodeMirror {
+  background: white !important;
+}
+.code-preview > .CodeMirror > .CodeMirror-scroll > .CodeMirror-gutters > .CodeMirror-gutter {
+  background: white !important;
+}

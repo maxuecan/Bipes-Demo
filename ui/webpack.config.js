@@ -202,8 +202,8 @@ module.exports = {
           to: 'devinfo'
         },
         {
-            from: path.resolve(__dirname, 'bipesStyle.css'),
-            to: 'bipesStyle.css' 
+            from: path.resolve(__dirname, 'style.css'),
+            to: 'style.css' 
         }
       ]
     }),

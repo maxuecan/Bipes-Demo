@@ -37,7 +37,7 @@ module.exports = {
         assetModuleFilename: "media/[hash:10][ext][query]",
         // 自动清空上次打包的内容
         // 原理：在打包前，将path整个目录内容清空，再进行打包
-        publicPath: '/',
+        // publicPath: '/',
         clean: true
     },
     module: {
@@ -191,8 +191,8 @@ module.exports = {
                     to: 'blockly' 
                 },
                 {
-                    from: path.resolve(__dirname, 'bipesStyle.css'),
-                    to: 'bipesStyle.css' 
+                    from: path.resolve(__dirname, 'style.css'),
+                    to: 'style.css' 
                 }
             ]
         })
