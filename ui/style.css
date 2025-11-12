@@ -1054,6 +1054,15 @@ button.icon.medium:before  {
   background-size: 100%;
   cursor: pointer;
 }
+#consolePreviewButton {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 5px 0 0 15px;
+  background: url(./media/new-icon/console-off.png) center / cover;
+  background-size: 100%;
+  cursor: pointer;
+}
+
 .code-preview {
   visibility: hidden;
   position: absolute;
@@ -1070,4 +1079,124 @@ button.icon.medium:before  {
 }
 .code-preview > .CodeMirror > .CodeMirror-scroll > .CodeMirror-gutters > .CodeMirror-gutter {
   background: white !important;
+}
+
+.control-preview {
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 560px;
+  height: 400px;
+  min-width: 200px;
+  min-height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 15px 2px #EFEEE9;
+  z-index: 100;
+}
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 52px;
+  border-bottom: 1px solid #ccc;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background: #3498db;
+  cursor: move;
+  user-select: none;
+}
+.control-header > div {
+  display: flex;
+}
+.header-left > img {
+  width: 25px;
+  height: 25px;
+  margin: 0 10px 0 0;
+}
+.header-left > span {
+  color: white;
+}
+.header-right > img {
+  width: 25px;
+  height: 25px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.box-content {
+  height: calc(100% - 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+.resize-handle {
+  position: absolute;
+  background: #3498db;
+  z-index: 10;
+}        
+/* 四角控制点 */
+.resize-handle-nw {
+  top: -5px;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  cursor: nw-resize;
+}
+.resize-handle-ne {
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  cursor: ne-resize;
+}
+.resize-handle-sw {
+  bottom: -5px;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  cursor: sw-resize;
+}
+.resize-handle-se {
+  bottom: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  cursor: se-resize;
+}
+/* 四边控制点 */
+.resize-handle-n {
+  top: -5px;
+  left: 5px;
+  right: 5px;
+  height: 10px;
+  cursor: n-resize;
+}
+.resize-handle-s {
+  bottom: -5px;
+  left: 5px;
+  right: 5px;
+  height: 10px;
+  cursor: s-resize;
+}
+.resize-handle-w {
+  top: 5px;
+  left: -5px;
+  bottom: 5px;
+  width: 10px;
+  cursor: w-resize;
+}   
+.resize-handle-e {
+  top: 5px;
+  right: -5px;
+  bottom: 5px;
+  width: 10px;
+  cursor: e-resize;
+}
+.terminal {
+  padding: 0 0 0 10px !important;
 }

@@ -1,32 +1,34 @@
 export default class CodePreview {
-    constructor(props) {
-        this.watch_timer = null
-        this.state = false
+    constructor() {
+        this.watch_timer = null // 定时器，监听积木区变动
+        this.state = false // 控制预览区是否显示
         this.code = CodeMirror.fromTextArea(document.getElementById('code-preview'), {
-            mode: 'python',
-            lineNumbers: true,
-            readOnly: true
-        })
+            mode: 'python',  // 代码模式
+            lineNumbers: true,  // 显示行号
+            readOnly: true // 只读模式
+        }) // 初始化CodeMirror
 
-        this.initEvent()
+        this.initEvent() // 初始化事件
     }
     initEvent() {
         $('#codePreviewButton').on('click', () => {
-            this.codePreviewChange(!this.state)
+            this.changeCode(!this.state)
         })
     }
-    codePreviewChange(state) {
+    // 显示隐藏预览区
+    changeCode(state) {
         $('.code-preview').css('visibility', (state ? 'visible' : 'hidden'))
         if (state) {
             $('.CodeMirror').eq(0).css('height', `calc(100vh - 3.5rem)`)
-            this.code.setValue(Code.generateCode())
-            this.watchCodeChange()
+            this.code.setValue(Code.generateCode()) // 通过Code.generateCode()加载代码内容
+            this.watchCodeChange() // 开启监听
         } else {
             clearTimeout(this.watch_timer)
             this.code.setValue('')
         }
         this.state = state
     }
+    // 监听积木区变动
     watchCodeChange() {
         this.watch_timer = setTimeout(() => {
             let code = Code.generateCode()

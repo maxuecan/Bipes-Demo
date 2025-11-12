@@ -405,7 +405,7 @@ class responsive {
 
     window.onresize = () => {
       Files.resize();
-      term.resize();
+      // term.resize();
 
       this.mobile = window.innerWidth < 60 * $em ? true : false;
     };

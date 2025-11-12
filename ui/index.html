@@ -116,7 +116,7 @@
     <div class="logo">BIPES</div>
     <div class="tabs">
       <div id="tab_blocks" class="tabon">...</div>
-      <div id="tab_console" class="taboff">终端输出</div>
+      <!-- <div id="tab_console" class="taboff">终端输出</div> -->
       <div id="tab_files" class="taboff">文件</div>
       <!-- <div id="tab_programs" class="taboff">...</div> -->
       <!-- <div id="tab_device" class="taboff">...</div> -->
@@ -160,7 +160,8 @@
 
       <button id="notificationButton" class="notext icon" title="..."></button>
 
-      <div id="codePreviewButton" title="查看代码预览"></div>
+      <div id="codePreviewButton" title="代码预览"></div>
+      <div id="consolePreviewButton" title="终端预览"></div>
       <!-- <button id="codePreviewButton" class="notext icon" title="查看代码预览"></button> -->
       <!-- <button id="linkButton" class="notext icon" title="..."></button> -->
       <!--<button id="trashButton" class="notext icon" title="..."></button>-->
@@ -192,62 +193,27 @@
   </div>
 
   <div id="content_blocks" class="content"></div>
-  <div id="content_console" class="content">
-    <span class="icon" id="tipsGeneric"><tt>Ctrl+Insert</tt> to copy and <tt>Shift+Insert</tt> to paste</span>
-    <tr height="25%" id="termTR">
-      <td>
-        <div style="display:inline-block; vertical-align:top; ">
-          <div id="term" class="xterm">
-          </div>
-        </div>
-      </td>
-      <td>
-        <div id="file-boxes">
-
-          <button onclick="Tool.runPython(); return false;">Run block based program</button>
-          <br>
-          <br>
-          <button onclick="Tool.stopPython(); return false;">Stop running program</button>
-          <button onclick="Tool.softReset(); return false;">Soft reset device</button>
-          <br>
-          <br>
-          <button onclick="Files.run(UI ['workspace'].content_file_name.value); return false;">Run edited Python
-            File</button>
-          <br>
-          <br>
-          <button onclick="term.write('\x1bc');  ">Clear terminal output</button>
-
-          <!--
-            <div class="file-box">
-                <strong>Send a file</strong>
-                <input type="file" id="put-file-select" />
-                <div id="put-file-list"></div>
-                <input type="button" value="Send to device" id="put-file-button" onclick="Files.put_file(); return false;" />
-            </div>
-          <div class="file-box">
-            <strong>Get a file</strong>
-            <input type="text" name="get_filename" id="get_filename" value="" size="13" />
-            <input type="button" value="Get from device" onclick="get_file(); return false;" />
-        </div>
-        <div class="file-box" id="file-status"><span style="color:#707070">(file operation status)</span></div>
-      -->
-        </div>
-        <label for="EasyMQTT_bridge" class="checkswitch">
-          Bridge data to EasyMQTT
-          <input type="checkbox" id="EasyMQTT_bridge" class="checkswitch" value="off">
-          <button id="settingsGeneric" class="notext icon" title="Configure EasyMQTT bridge"
-            style="height: 1.5rem; padding: 0 0.25rem;"
-            onclick="window.open('easymqtt_bridge.html','popup','width=600,height=600'); return false;"
-            target="popup"></button>
-          <span></span>
-        </label>
-      </td>
-    </tr>
-  </div>
 
   <!-- 代码预览 -->
   <div class="code-preview">
     <textarea name="code" id="code-preview"></textarea>
+  </div>
+
+  <!-- 控制台预览 -->
+  <div class="control-preview">
+    <div class="control-header">
+      <div class="header-left">
+        <img src="./media/new-icon/console.png" alt="">
+        <span>控制台</span>
+      </div>
+      <div class="header-right">
+        <img class="control-clear" src="./media/new-icon/delete.png" title="清空控制台">
+        <img class="control-close" src="./media/new-icon/close.png" title="关闭控制台">
+      </div>
+    </div>
+    <div class="box-content">
+      <div id="term" class="xterm"></div>
+    </div>
   </div>
 
   <!-- ################################################## -->
@@ -548,6 +514,60 @@
       BIPES
     -->
   </div>
+
+  <!-- 旧控制台 -->
+  <!-- <div id="content_console" class="content">
+    <span class="icon" id="tipsGeneric"><tt>Ctrl+Insert</tt> to copy and <tt>Shift+Insert</tt> to paste</span>
+    <tr height="25%" id="termTR">
+      <td>
+        <div style="display:inline-block; vertical-align:top; ">
+          <div id="term" class="xterm">
+          </div>
+        </div>
+      </td>
+      <td>
+        <div id="file-boxes">
+          <button onclick="Tool.runPython(); return false;">Run block based program</button>
+          <br>
+          <br>
+          <button onclick="Tool.stopPython(); return false;">Stop running program</button>
+          <button onclick="Tool.softReset(); return false;">Soft reset device</button>
+          <br>
+          <br>
+          <button onclick="Files.run(UI ['workspace'].content_file_name.value); return false;">Run edited Python
+            File</button>
+          <br>
+          <br>
+          <button onclick="term.write('\x1bc');  ">Clear terminal output</button>
+
+          0
+          <div class="file-box">
+            <strong>Send a file</strong>
+            <input type="file" id="put-file-select" />
+            <div id="put-file-list"></div>
+            <input type="button" value="Send to device" id="put-file-button" onclick="Files.put_file(); return false;" />
+          </div>
+          <div class="file-box">
+            <strong>Get a file</strong>
+            <input type="text" name="get_filename" id="get_filename" value="" size="13" />
+            <input type="button" value="Get from device" onclick="get_file(); return false;" />
+          </div>
+          <div class="file-box" id="file-status"><span style="color:#707070">(file operation status)</span></div>
+          0
+
+        </div>
+        <label for="EasyMQTT_bridge" class="checkswitch">
+          Bridge data to EasyMQTT
+          <input type="checkbox" id="EasyMQTT_bridge" class="checkswitch" value="off">
+          <button id="settingsGeneric" class="notext icon" title="Configure EasyMQTT bridge"
+            style="height: 1.5rem; padding: 0 0.25rem;"
+            onclick="window.open('easymqtt_bridge.html','popup','width=600,height=600'); return false;"
+            target="popup"></button>
+          <span></span>
+        </label>
+      </td>
+    </tr>
+  </div> -->
 
   <!-- <div class="account-panel">
     <span>

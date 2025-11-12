@@ -179,8 +179,8 @@ Code.LANG = Code.getLang();
  * List of tab names.
  * @private
  */
-// 'programs', 'device', 'databoard', 'iot', 'mqtt'
-Code.TABS_ = ['blocks', 'console', 'files'];
+// 'console', 'programs', 'device', 'databoard', 'iot', 'mqtt'
+Code.TABS_ = ['blocks', 'files'];
 
 Code.current = ["blocks", "", ""]
 
@@ -344,9 +344,9 @@ Code.renderContent = (_navigation) => {
       }
       Files.handleCurrentProject()
       break
-    case "console":
-      term.resize()
-      break
+    // case "console":
+    //   term.resize()
+    //   break
     // case "device":
     // case "programs":
     // case "iot":
@@ -368,9 +368,9 @@ Code.resizeContent = (_navigation) => {
       case "files":
         Files.resize()
         break
-      case "console":
-        term.resize()
-        break
+      // case "console":
+      //   term.resize()
+      //   break
       // case "databoard":
       // case "device":
       // case "programs":

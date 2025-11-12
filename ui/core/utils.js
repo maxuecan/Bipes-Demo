@@ -924,16 +924,16 @@ class term {
    * Resize the ``xterm.js`` terminal, triggered by ``window.onresize`` event.
    */
   static resize () {
-    if(!Code.current.includes('console'))
-      return
-
-    let cols
-    if (Code.current[0] == 'console')
-      cols = Math.max(50, Math.min(200, (window.innerWidth - 4*$em) / 7)) | 0
-    else
-      cols = Math.max(50, Math.min(200, ((window.innerWidth)/2 - 4*$em) / 7)) | 0
-
-    let rows = Math.max(15, Math.min(40, (window.innerHeight - 20*$em) / 12)) | 0
+    // if(!Code.current.includes('console'))
+    //   return
+    // let cols
+    // if (Code.current[0] == 'console')
+    //   cols = Math.max(50, Math.min(200, (window.innerWidth - 4*$em) / 7)) | 0
+    // else
+    //   cols = Math.max(50, Math.min(200, ((window.innerWidth)/2 - 4*$em) / 7)) | 0
+    // let rows = Math.max(15, Math.min(40, (window.innerHeight - 20*$em) / 12)) | 0
+    let cols = Math.max(50, Math.min(200, ($('.box-content')[0].offsetWidth) / 7 - 1)) | 0
+    let rows = Math.max(15, Math.min(40, ($('.box-content')[0].offsetHeight) / 14 + 1)) | 0
 
     terminal.resize(cols, rows);
   }
