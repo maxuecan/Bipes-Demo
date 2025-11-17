@@ -1,3 +1,5 @@
+import EventEmitterController from '../utils/event-emitter-controller'
+
 export default class ControlPreview {
     constructor(element, options = {}) {
         /* <--- 拖拽拉伸参数 start ---> */
@@ -23,6 +25,10 @@ export default class ControlPreview {
 
         this.state = false // 控制台状态
         this.initEvent() // 初始化事件
+
+        EventEmitterController.on('control-pewivew-change-console', (state) => {
+            this.changeConsole(state)
+        })
     }
     initEvent() {
         $('#consolePreviewButton').on('click', () => {

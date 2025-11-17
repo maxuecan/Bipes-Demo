@@ -1,5 +1,8 @@
-export default class CodePreview {
+import Common from './common'
+
+export default class CodePreview extends Common {
     constructor() {
+        super()
         this.watch_timer = null // 定时器，监听积木区变动
         this.state = false // 控制预览区是否显示
         this.code = CodeMirror.fromTextArea(document.getElementById('code-preview'), {
@@ -7,8 +10,6 @@ export default class CodePreview {
             lineNumbers: true,  // 显示行号
             readOnly: true // 只读模式
         }) // 初始化CodeMirror
-
-        this.initEvent() // 初始化事件
     }
     initEvent() {
         $('#codePreviewButton').on('click', () => {
@@ -17,7 +18,9 @@ export default class CodePreview {
     }
     // 显示隐藏预览区
     changeCode(state) {
+        let status = state ? 'on' : 'off'
         $('.code-preview').css('visibility', (state ? 'visible' : 'hidden'))
+        $('#codePreviewButton').css('background', `url(../media/new-icon/code-${status}.png) center / cover`)
         if (state) {
             $('.CodeMirror').eq(0).css('height', `calc(100vh - 3.5rem)`)
             this.code.setValue(Code.generateCode()) // 通过Code.generateCode()加载代码内容
