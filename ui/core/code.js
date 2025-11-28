@@ -805,12 +805,12 @@ Code.initLanguage = function () {
   // Inject language strings.
   //Changed to a fixed title for all languages - BIPES Beta
   document.getElementById('tab_blocks').textContent = MSG['blocks'];
-  document.getElementById('runButton').title = MSG['runTooltip'];
   document.getElementById('saveButton').title = MSG['saveTooltip'];
   document.getElementById('loadButton').title = MSG['loadTooltip'];
   document.getElementById('notificationButton').title = MSG['notificationTooltip'];
   document.getElementById('toolbarButton').title = MSG['toolbarTooltip'];
 
+  // document.getElementById('runButton').title = MSG['runTooltip'];
   // document.getElementById('languageIcon').title = MSG['languageTooltip'];
   // document.getElementById('forumButton').title = MSG['forumTooltip'];
   // document.getElementById('linkButton').title = MSG['linkTooltip'];

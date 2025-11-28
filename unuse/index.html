@@ -154,9 +154,9 @@
           <option value="UNO">Arduino UNO or MEGA (Snek @ 38400)</option>
           <option value="UNO2">Arduino UNO or MEGA (Snek @ 115200)</option>
           <option value="EV3">Lego EV3</option>
-        </select>
+        </select> -->
         <button id="runButton" class="notext primary icon" title="..."></button>
-      </div> -->
+      <!-- </div> -->
       <button id="saveButton" class="notext icon" title="..."></button>
 
       <label id="loadButton" for="loadXML" class="notext button icon" title="..."></label>
@@ -222,9 +222,11 @@
   </div>
 
   <!-- 设置预览 -->
-  <div class="settings-preview">
+  <div id="settings-preview">
     <div id="settings-modal">
       <h3>设置</h3>
+
+      <!-- 模式设置 -->
       <div class="settings-group">
         <label>模式选择</label>
         <div class="radio-group">
@@ -242,6 +244,8 @@
           </div>
         </div>
       </div>
+      
+      <!-- 弹窗按钮 -->
       <div class="modal-actions">
         <button id="cancel-settings" class="btn btn-secondary">取消</button>
         <button id="save-settings" class="btn btn-primary">保存</button>
@@ -548,4 +552,228 @@
       BIPES
     -->
   </div>
+
+  <!-- 旧控制台 -->
+  <!-- <div id="content_console" class="content">
+    <span class="icon" id="tipsGeneric"><tt>Ctrl+Insert</tt> to copy and <tt>Shift+Insert</tt> to paste</span>
+    <tr height="25%" id="termTR">
+      <td>
+        <div style="display:inline-block; vertical-align:top; ">
+          <div id="term" class="xterm">
+          </div>
+        </div>
+      </td>
+      <td>
+        <div id="file-boxes">
+          <button onclick="Tool.runPython(); return false;">Run block based program</button>
+          <br>
+          <br>
+          <button onclick="Tool.stopPython(); return false;">Stop running program</button>
+          <button onclick="Tool.softReset(); return false;">Soft reset device</button>
+          <br>
+          <br>
+          <button onclick="Files.run(UI ['workspace'].content_file_name.value); return false;">Run edited Python
+            File</button>
+          <br>
+          <br>
+          <button onclick="term.write('\x1bc');  ">Clear terminal output</button>
+
+          0
+          <div class="file-box">
+            <strong>Send a file</strong>
+            <input type="file" id="put-file-select" />
+            <div id="put-file-list"></div>
+            <input type="button" value="Send to device" id="put-file-button" onclick="Files.put_file(); return false;" />
+          </div>
+          <div class="file-box">
+            <strong>Get a file</strong>
+            <input type="text" name="get_filename" id="get_filename" value="" size="13" />
+            <input type="button" value="Get from device" onclick="get_file(); return false;" />
+          </div>
+          <div class="file-box" id="file-status"><span style="color:#707070">(file operation status)</span></div>
+          0
+
+        </div>
+        <label for="EasyMQTT_bridge" class="checkswitch">
+          Bridge data to EasyMQTT
+          <input type="checkbox" id="EasyMQTT_bridge" class="checkswitch" value="off">
+          <button id="settingsGeneric" class="notext icon" title="Configure EasyMQTT bridge"
+            style="height: 1.5rem; padding: 0 0.25rem;"
+            onclick="window.open('easymqtt_bridge.html','popup','width=600,height=600'); return false;"
+            target="popup"></button>
+          <span></span>
+        </label>
+      </td>
+    </tr>
+  </div> -->
+
+  <!-- <div class="account-panel">
+    <span>
+      <span id="account_header">Hello, <span id="account_user" role="textbox" contenteditable>User</span>!</span>
+      <details open>
+        <summary>
+          <h2>Projects</h2>
+          <button value="New Project" id="newProjectButton" class="notext button icon" title="Create new project"
+            onclick="UI ['workspace'].newProject();"></button>
+        </summary>
+        <span id='ProjectList'></span>
+      </details>
+    </span>
+    <details open>
+      <summary>
+        <h2>Settings</h2>
+      </summary>
+      <span class="icon" id="languageIcon">
+        <select id="languageMenu"></select>
+      </span>
+    </details>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_mqtt" class="content" style="padding: 0;">
+    <iframe id="easymqtt_iframe" src="../easymqtt/index.html" width="100%" height="100%" frameBorder="0"></iframe>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_iot" class="content">
+    <iframe id="content_iot" src="freeboard/index.html" width="100%" height="100%" frameBorder="0"></iframe>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_databoard" class="content" style="padding: 0;">
+    <iframe id="databoard_iframe" src="../databoard/index.html" width="100%" height="100%" frameBorder="0"></iframe>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_device" class="content">
+    <center>
+      <label id="device_title"><b>ESP8266</b><br></label>
+      <br>
+      <img id="device_img" src="devinfo/Node-MCU-ESP-12E-Pin-Out-Diagram2.jpg">
+      <br>
+
+      <label id="device_desc">
+        <BR><BR><input type='button' onclick='loadDoc();' value='Open Documentation' /> <BR><BR>To use ESP8266, simply
+        connecto to MicroPython board using Wifi. Micropython must be previously installed on the board. Follow these
+        instructions to install it.
+      </label>
+    </center>
+  </div> -->
+
+  <!-- ################################################## -->
+  <!-- <div id="content_programs" class="content">
+    <center>
+      <iframe src="https://bipes-271213.appspot.com/list" width="100%" height="500" frameBorder="0"></iframe>
+	   
+      <iframe src="shared.html" width="100%" height="500" frameBorder="0"></iframe>
+    </center>
+  </div> -->
+
+  <!-- The Modal -->
+  <!-- <div id="myModal" class="modal">
+    Modal content
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="closeM">&times;</span>
+        <h2><span id="modalTitle"></span></h2>
+      </div>
+      <div class="modal-body">
+        <span id="modalMsg"></span>
+      </div>
+      <div class="modal-footer">
+
+        <br>
+        <center>
+          <input type="checkbox" name="checkfield" id="g01-01" onchange="doalert(this)" />
+          <span id="modalFooter"></span>
+          <br>
+          <br>
+          <button onclick="closeModal()"><span id="modalClose"></span></button>
+
+          <br>
+          <br>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    //var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("closeM")[0];
+
+    // When the user clicks the button, open the modal 
+    //btn.onclick = function() {
+    //	  modal.style.display = "block";
+    //}
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function loadPage() {
+      var x = getCookieModal('BIPES_Splash');
+      if (x) {
+        console.log('Not showing splash');
+      } else {
+        console.log('Showing splash');
+        modal.style.display = "block";
+      }
+    }
+
+    function doalert(checkboxElem) {
+
+      if (checkboxElem.checked) {
+        setCookieModal('BIPES_Splash', 'BIPES_SplashC', 1);
+        console.log('Modal Cookie Set');
+      } else {
+        eraseCookieModal('BIPES_Splash');
+        console.log('Modal Cookie deleted');
+      }
+    }
+
+
+    function setCookieModal(name, value, days) {
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookieModal(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function eraseCookieModal(name) {
+      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+  </script> -->
+  <!-- End of modal Splash Screen -->
 </html>

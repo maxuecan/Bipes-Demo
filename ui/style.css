@@ -1049,23 +1049,24 @@ button.icon.medium:before  {
     padding-bottom: .125rem;
 }
 
-#codePreviewButton {
+.com-nav-btn {
   width: 1.5rem;
   height: 1.5rem;
+  background-size: 100%;
+  cursor: pointer;
+}
+#codePreviewButton {
   margin: 5px 0 0 5px;
   background: url(./media/new-icon/code-off.png) center / cover;
-  background-size: 100%;
-  cursor: pointer;
 }
 #consolePreviewButton {
-  width: 1.5rem;
-  height: 1.5rem;
   margin: 5px 0 0 15px;
   background: url(./media/new-icon/console-off.png) center / cover;
-  background-size: 100%;
-  cursor: pointer;
 }
-
+#settingsButton {
+  margin: 5px 0 0 15px;
+  background: url(./media/new-icon/setting-off.png) center / cover;
+}
 .code-preview {
   visibility: hidden;
   position: absolute;
@@ -1204,7 +1205,7 @@ button.icon.medium:before  {
   padding: 0 0 0 10px !important;
 }
 
-#sk-run {
+#bipes-run {
   /* flex: 0 0 atuo; */
   display: flex;
   align-items: center;
@@ -1218,11 +1219,11 @@ button.icon.medium:before  {
   background: #3498db;
   cursor: pointer;
 }
-#sk-run > img {
+#bipes-run > img {
   width: 25px;
   height: 25px;
 }
-#sk-run > span {
+#bipes-run > span {
   width: 27px;
 }
 

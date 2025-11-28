@@ -501,14 +501,14 @@ class workspace {
 
     this.websocket = { url: get('#url'), pass: get('#password') };
     this.runButton = {
-      dom: get('#runButton'),
+      // dom: get('#runButton'),
       status: true
     };
     this.connectButton = get('#connectButton');
     this.saveButton = get('#saveButton');
     this.loadButton = get('#loadXML');
     this.connectButton.onclick = () => { this.connectClick() };
-    this.runButton.dom.onclick = () => { this.run() };
+    // this.runButton.dom.onclick = () => { this.run() };
     this.saveButton.onclick = () => { this.saveXML() };
     this.loadButton.addEventListener('change', () => { this.loadXML() });
 
@@ -568,7 +568,7 @@ workspace.prototype.connectClick = function () {
 workspace.prototype.receiving = function () {
   this.channel_connect.className = '';
   this.runButton.status = false;
-  this.runButton.dom.className = 'icon on';
+  // this.runButton.dom.className = 'icon on';
   this.toolbarButton.className = 'icon medium on';
   this.connectButton.className = 'icon on';
   this.term.className = 'on';
@@ -580,7 +580,7 @@ workspace.prototype.receiving = function () {
 workspace.prototype.runAbort = function () {
   this.channel_connect.className = '';
   this.runButton.status = true;
-  this.runButton.dom.className = 'icon';
+  // this.runButton.dom.className = 'icon';
   this.toolbarButton.className = 'icon medium';
   this.connectButton.className = 'icon';
   this.term.className = '';

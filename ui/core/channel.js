@@ -303,7 +303,7 @@ class websocket {
           Tool.bipesVerify();
           if (event.data.includes(">>> ")) {
             UI['workspace'].runButton.status = true;
-            UI['workspace'].runButton.dom.className = 'icon';
+            // UI['workspace'].runButton.dom.className = 'icon';
             UI['workspace'].toolbarButton.className = 'icon medium';
             if (this.completeBufferCallback.length > 0) {
               try {
@@ -398,7 +398,7 @@ class webserial {
                 Channel['webserial'].last4chars = Channel['webserial'].last4chars.concat(chunk.substr(-4, 4)).substr(-4, 4)
                 if (Channel['webserial'].last4chars.includes(">>> ")) {
                   UI['workspace'].runButton.status = true;
-                  UI['workspace'].runButton.dom.className = 'icon';
+                  // UI['workspace'].runButton.dom.className = 'icon';
                   UI['workspace'].toolbarButton.className = 'icon medium';
                   if (Channel['webserial'].completeBufferCallback.length > 0) {
                     try {
@@ -700,7 +700,7 @@ class webbluetooth {
     this.last4chars = this.last4chars.concat(chunk.substr(-4, 4)).substr(-4, 4)
     if (this.last4chars.includes(">>> ")) {
       UI['workspace'].runButton.status = true;
-      UI['workspace'].runButton.dom.className = 'icon';
+      // UI['workspace'].runButton.dom.className = 'icon';
       UI['workspace'].toolbarButton.className = 'icon medium';
       if (this.completeBufferCallback.length > 0) {
         try {

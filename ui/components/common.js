@@ -1,8 +1,6 @@
 export default class Common {
     constructor(props) {
-        this.initEvent()
+        if (this.initEvent) this.initEvent()
     }
-    initEvent() {
-
-    }
+    initEvent() {}
 }

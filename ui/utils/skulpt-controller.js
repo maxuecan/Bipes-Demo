@@ -4,7 +4,6 @@ import * as Sk from 'skulpt';
 // import 'skulpt/dist/skulpt.js';
 // import 'skulpt/dist/skulpt-stdlib.js';
 import Common from '../components/common'
-import EventEmitterController from './event-emitter-controller'
 
 export default class SkulptController extends Common {
     constructor() {
@@ -18,13 +17,6 @@ export default class SkulptController extends Common {
         });
 
         this.sk = Sk
-    }
-    initEvent() {
-        // 运行按钮
-        $('#sk-run').on('click', () => {
-            this.runPythonCode()
-            EventEmitterController.emit('open-control-pewivew')
-        })
     }
     // 输出内容，将结果输出在终端
     outF(text) {
