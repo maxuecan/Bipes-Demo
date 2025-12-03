@@ -7,7 +7,7 @@ import SkulptController from './skulpt-controller.js'
 import EventEmitterController from './event-emitter-controller.js'
 
 export default class BipesController extends Common {
-    constructor(container) {
+    constructor() {
         super()
 
         this._settings = this.getLocalSettings()
@@ -15,7 +15,7 @@ export default class BipesController extends Common {
         this.SKULPT_CONSTROLER = new SkulptController()
 
         this.CODE_PREVIEW = new CodePreview()
-        this.CONTROL_PREVIEW = new ControlPreview(document.getElementsByClassName('control-preview')[0])
+        this.CONTROL_PREVIEW = new ControlPreview()
         this.SETTING_PREVIEW = new SettingPreview()
     }
 
