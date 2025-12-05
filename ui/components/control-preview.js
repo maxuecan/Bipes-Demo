@@ -19,7 +19,7 @@ export default class ControlPreview {
         this.state = false // 控制台状态
         this.initEvent() // 初始化事件
 
-        EventEmitterController.on('control-pewivew-change-console', (state) => {
+        EventEmitterController.on('control-preview-change', (state) => {
             this.changeConsole(state)
         })
     }

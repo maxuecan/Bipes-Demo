@@ -249,6 +249,18 @@
     </div>
   </div>
   
+  <!-- 海龟画图 -->
+  <div class="draw-preview">
+    <div class="draw-header">
+      <span class="draw-header-left">海龟图</span>
+      <div class="header-right">
+        <img class="draw-close" src="./media/new-icon/close.png" title="关闭海龟">
+      </div>
+    </div>
+    <div class="draw-content">
+      <div id="draw-canvas" style="width: 600px; height: 600px;"></div>
+    </div>
+  </div>
 
   <!-- ################################################## -->
   <div id="content_files" class="content">
@@ -438,114 +450,5 @@
         });
       };
     </script>
-
-    <!-- Start of modal Splash Screen -->
-
-    <!-- <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-      }
-
-      /* The Modal (background) */
-      .modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1000000;
-        /* Sit on top - amazing, but Blockly has z-index up to 100000*/
-        padding-top: 100px;
-        /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
-      }
-
-      /* Modal Content */
-      .modal-content {
-        position: relative;
-        background-color: #fefefe;
-        margin: auto;
-        padding: 0;
-        border: 1px solid #188;
-        width: 80%;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -webkit-animation-name: animatetop;
-        -webkit-animation-duration: 0.4s;
-        animation-name: animatetop;
-        animation-duration: 0.4s
-      }
-
-      /* Add Animation */
-      @-webkit-keyframes animatetop {
-        from {
-          top: -300px;
-          opacity: 0
-        }
-
-        to {
-          top: 0;
-          opacity: 1
-        }
-      }
-
-      @keyframes animatetop {
-        from {
-          top: -300px;
-          opacity: 0
-        }
-
-        to {
-          top: 0;
-          opacity: 1
-        }
-      }
-
-      /* The Close Button */
-      .closeM {
-        color: white;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-
-      .closeM:hover,
-      .closeM:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-      }
-
-      .modal-header {
-        padding: 2px 16px;
-        background-color: #4d4dff;
-        color: white;
-      }
-
-      .modal-body {
-        padding: 2px 16px;
-      }
-
-      .modal-footer {
-        padding: 2px 16px;
-        background-color: #4d4dff;
-        color: white;
-      }
-    </style> -->
-
-    <!-- Trigger/Open The Modal For testing only
-      <body onload="loadPage()">
-      <button id="myBtn">Open Modal SplashScreen</button>
-      BIPES
-    -->
   </div>
 </html>

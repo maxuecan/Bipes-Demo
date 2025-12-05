@@ -2,6 +2,7 @@ import Common from '../components/common'
 import CodePreview from '../components/code-preview.js'
 import ControlPreview from '../components/control-preview.js'
 import SettingPreview from '../components/setting-preview.js'
+import DrawPreview from '../components/draw-preview.js'
 
 import SkulptController from './skulpt-controller.js'
 import EventEmitterController from './event-emitter-controller.js'
@@ -17,6 +18,7 @@ export default class BipesController extends Common {
         this.CODE_PREVIEW = new CodePreview()
         this.CONTROL_PREVIEW = new ControlPreview()
         this.SETTING_PREVIEW = new SettingPreview()
+        this.DRAW_PREVIEW = new DrawPreview()
     }
 
     initEvent() {
@@ -26,16 +28,20 @@ export default class BipesController extends Common {
     
     // 运行 
     bipesRun() {
-        let { mode } = this._settings
+        let { mode } = this.getLocalSettings()
         switch(mode) {
             case 'hardware':
                 UI['workspace'].run()
                 break;
             case 'offline':
+                EventEmitterController.emit('open-control-preview')
                 this.SKULPT_CONSTROLER.runPythonCode()
-                EventEmitterController.emit('open-control-pewivew')
                 break;
             case 'turtle':
+                EventEmitterController.emit('open-draw-preview')
+                setTimeout(() => {
+                    this.SKULPT_CONSTROLER.runSkulptCode()
+                })
                 break;
             default:
                 break;
