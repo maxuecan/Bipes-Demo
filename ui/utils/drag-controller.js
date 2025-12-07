@@ -1,5 +1,5 @@
 export default class DragController {
-    constructor(element, options = {}, callback = null) {
+    constructor(element, options = {}, type = '', callback = null) {
         this.element = element
         this.options = {
             minWidth: options.minWidth || 100,
@@ -9,6 +9,7 @@ export default class DragController {
             onResize: options.onResize || null,
             handles: options.handles || 'all'
         }
+        this.type = type
         this.callback = callback
 
         this.isResizing = false;
@@ -53,7 +54,7 @@ export default class DragController {
             handle.addEventListener("mousedown", this.startResize.bind(this))
         })
         // 标题栏拖拽移动
-        const header = this.element.querySelector(".control-header")
+        const header = this.element.querySelector(`.${this.type}-header`)
         if (header) {
             header.addEventListener("mousedown", this.startDrag.bind(this))
         }
@@ -192,7 +193,10 @@ export default class DragController {
             })
         }
 
-        if (this.callback) this.callback()
+        if (this.callback) this.callback({
+            newWidth,
+            newHeight
+        })
     }
     doDrag(e) {
         const deltaX = e.clientX - this.startX

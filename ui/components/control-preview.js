@@ -11,6 +11,7 @@ export default class ControlPreview {
                 maxWidth: 800,
                 maxHeight: 607
             },
+            'control',
             () => {
                 term.resize()
             }
