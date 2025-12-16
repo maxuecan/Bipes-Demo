@@ -2,10 +2,10 @@ export default class DragController {
     constructor(element, options = {}, type = '', callback = null) {
         this.element = element
         this.options = {
-            minWidth: options.minWidth || 100,
-            minHeight: options.minHeight || 80,
+            minWidth: options.minWidth || 300,
+            minHeight: options.minHeight || 300,
             maxWidth: options.maxWidth || 800,
-            maxHeight: options.maxHeight || 600,
+            maxHeight: options.maxHeight || 800,
             onResize: options.onResize || null,
             handles: options.handles || 'all'
         }
@@ -21,8 +21,19 @@ export default class DragController {
         this.startHeight = 0;
         this.startLeft = 0;
         this.startTop = 0;
+        this.boundary = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
 
         this.initEvent()
+
+        window.addEventListener("resize", (e) => {
+            this.boundary = {
+                width: e.currentTarget.innerWidth,
+                height: e.currentTarget.innerHeight
+            }
+        })
     }
     initEvent() {
         // 初始化拖拽拉伸功能
@@ -52,6 +63,7 @@ export default class DragController {
 
         handles.forEach((handle) => {
             handle.addEventListener("mousedown", this.startResize.bind(this))
+            handle.addEventListener("mouseup", this.stopResize.bind(this))
         })
         // 标题栏拖拽移动
         const header = this.element.querySelector(`.${this.type}-header`)
@@ -62,6 +74,7 @@ export default class DragController {
         document.addEventListener("mouseup", this.stopResize.bind(this))
     }
     startResize(e) {
+        if (this.isDragging) return
         e.preventDefault()
         this.isResizing = true
         this.currentHandle = e.target
@@ -77,6 +90,7 @@ export default class DragController {
         document.body.style.userSelect = "none"
     }
     startDrag(e) {
+        if (this.isResizing) return
         e.preventDefault()
         this.isDragging = true
         this.startX = e.clientX
@@ -90,7 +104,6 @@ export default class DragController {
     }
     handleResize(e) {
         if (!this.isResizing && !this.isDragging) return
-
         if (this.isResizing) {
             this.doResize(e)
         } else if (this.isDragging) {
@@ -105,76 +118,131 @@ export default class DragController {
         let newHeight = this.startHeight
         let newLeft = this.startLeft
         let newTop = this.startTop
+        let _deltaX = 0
+        let _deltaY = 0
 
         // 根据拖拽的控制点调整尺寸和位置
         if (this.currentHandle.classList.contains("resize-handle-e")) {
-            newWidth = Math.max(
-                this.options.minWidth,
-                Math.min(this.options.maxWidth, this.startWidth + deltaX)
-            )
+            newWidth = this.getSize('max-width', this.startWidth + deltaX)
+            if (
+                newWidth === this.options.minWidth ||
+                this.boundary.width - (newWidth + this.startLeft) < 10 ||
+                (Number.isFinite(this.options.maxWidth) && (this.boundary.width - (newWidth + this.startLeft) <= 10))
+            ) return
         } else if (this.currentHandle.classList.contains("resize-handle-w")) {
+            newLeft = this.startLeft + deltaX
+            if (newLeft <= 2) return
+
             newWidth = Math.max(
                 this.options.minWidth,
-                Math.min(this.options.maxWidth, this.startWidth - deltaX)
+                deltaX < 0 ? this.startWidth - deltaX : Math.max(this.options.minWidth, this.startWidth - deltaX)
             )
-            newLeft = this.startLeft + deltaX
-            if (newLeft > this.startLeft) newLeft = this.startLeft
+
+            if (
+                newWidth === this.options.minWidth ||
+                (Number.isFinite(this.options.maxWidth) && (newWidth > this.options.maxWidth))
+            ) return
         } else if (this.currentHandle.classList.contains("resize-handle-s")) {
-            newHeight = Math.max(
-                this.options.minHeight,
-                Math.min(this.options.maxHeight, this.startHeight + deltaY)
-            )
+            newHeight = this.getSize('max-height', this.startHeight + deltaY)
+            
+            if (
+                this.boundary.height - (newHeight + newTop) <= 10 ||
+                (Number.isFinite(this.options.maxHeight) && (newHeight > this.options.maxHeight))
+            ) return
         } else if (this.currentHandle.classList.contains("resize-handle-n")) {
+            newTop = this.startTop + deltaY
+            if (newTop <= 2) return 
+
             newHeight = Math.max(
                 this.options.minHeight,
-                Math.min(this.options.maxHeight, this.startHeight - deltaY)
+                deltaY < 0 ? this.startHeight - deltaY : Math.max(this.options.minHeight, this.startHeight - deltaY)
             )
-            newTop = this.startTop + deltaY
-            if (newTop > this.startTop) newTop = this.startTop
+
+            if (
+                newHeight === this.options.minHeight || 
+                (Number.isFinite(this.options.maxHeight) && (newHeight > this.options.maxHeight))
+            ) return
         } else if (this.currentHandle.classList.contains("resize-handle-se")) {
-            newWidth = Math.max(
-                this.options.minWidth,
-                Math.min(this.options.maxWidth, this.startWidth + deltaX)
-            )
-            newHeight = Math.max(
-                this.options.minHeight,
-                Math.min(this.options.maxHeight, this.startHeight + deltaY)
-            )
+            newWidth = this.getSize('max-width', this.startWidth + deltaX)
+            newHeight = this.getSize('max-height', this.startHeight + deltaY)
+            
+            if (this.boundary.width - (newWidth + this.startLeft) < 10) {
+                newWidth = this.boundary.width - this.startLeft - 10
+            }
+            if (this.boundary.height - (newHeight + this.startTop) < 10) {
+                newHeight = this.boundary.height - this.startTop - 10
+            }
         } else if (this.currentHandle.classList.contains("resize-handle-sw")) {
-            newWidth = Math.max(
-                this.options.minWidth,
-                Math.min(this.options.maxWidth, this.startWidth - deltaX)
-            )
-            newHeight = Math.max(
-                this.options.minHeight,
-                Math.min(this.options.maxHeight, this.startHeight + deltaY)
-            )
+            newWidth = this.getSize('max-width', this.startWidth - deltaX)
+            newHeight = this.getSize('max-height', this.startHeight + deltaY)
+
             newLeft = this.startLeft + deltaX
-            if (newLeft > this.startLeft) newLeft = this.startLeft
+            if (newLeft <= 2) {
+                newLeft = 2
+                _deltaX = newLeft - this.startLeft
+                newWidth = Math.min(this.options.maxWidth, this.startWidth - _deltaX)
+            }
+            if (newWidth === this.options.minWidth) {
+                _deltaX = this.startWidth - this.options.minWidth
+                newLeft = this.startLeft + _deltaX
+            } else if (newWidth === this.options.maxWidth) {
+                _deltaX = this.options.maxWidth - this.startWidth
+                newLeft = this.startLeft - _deltaX
+            }
+            if (this.boundary.height - (newHeight + this.startTop) < 10) {
+                newHeight = this.boundary.height - this.startTop - 10
+            }
         } else if (this.currentHandle.classList.contains("resize-handle-ne")) {
-            newWidth = Math.max(
-                this.options.minWidth,
-                Math.min(this.options.maxWidth, this.startWidth + deltaX)
-            )
-            newHeight = Math.max(
-                this.options.minHeight,
-                Math.min(this.options.maxHeight, this.startHeight - deltaY)
-            )
-            newTop = this.startTop + deltaY
-            if (newTop > this.startTop) newTop = this.startTop
+            newWidth = this.getSize('max-width', this.startWidth + deltaX)
+            newHeight = this.getSize('max-height', this.startHeight - deltaY)
+
+            newTop = this.startTop + deltaY 
+            if (newTop <= 2) {
+                newTop = 2
+                _deltaY = newTop - this.startTop
+                newHeight = Math.min(this.options.maxHeight, this.startHeight - _deltaY)
+            }
+            if (newHeight === this.options.minHeight) {
+                _deltaY = this.startHeight - this.options.minHeight
+                newTop = this.startTop + _deltaY 
+            } else if (newHeight === this.options.maxHeight) {
+                _deltaY = this.options.maxHeight - this.startHeight
+                newTop = this.startTop - _deltaY
+            }
+            if (this.boundary.width - (newWidth + this.startLeft) < 10) {
+                newWidth = this.boundary.width - this.startLeft - 10
+            }
         } else if (this.currentHandle.classList.contains("resize-handle-nw")) {
-            newWidth = Math.max(
-                this.options.minWidth,
-                Math.min(this.options.maxWidth, this.startWidth - deltaX)
-            )
-            newHeight = Math.max(
-                this.options.minHeight,
-                Math.min(this.options.maxHeight, this.startHeight - deltaY)
-            )
+            newWidth = this.getSize('max-width', this.startWidth - deltaX)
+            newHeight = this.getSize('max-height', this.startHeight - deltaY)
+
             newLeft = this.startLeft + deltaX
+            if (newLeft <= 2) {
+                newLeft = 2
+                _deltaX = newLeft - this.startLeft
+                newWidth = Math.min(this.options.maxWidth, this.startWidth - _deltaX)
+            }
+            if (newWidth === this.options.minWidth) {
+                _deltaX = this.startWidth - this.options.minWidth
+                newLeft = this.startLeft + _deltaX
+            } else if (newWidth === this.options.maxWidth) {
+                _deltaX = this.options.maxWidth - this.startWidth
+                newLeft = this.startLeft - _deltaX
+            }
+
             newTop = this.startTop + deltaY
-            if (newLeft > this.startLeft) newLeft = this.startLeft
-            if (newTop > this.startTop) newTop = this.startTop
+            if (newTop <= 2) {
+                newTop = 2
+                _deltaY = newTop - this.startTop
+                newHeight = Math.min(this.options.maxHeight, this.startHeight - _deltaY)
+            }
+            if (newHeight === this.options.minHeight) {
+                _deltaY = this.startHeight - this.options.minHeight
+                newTop = this.startTop + _deltaY 
+            } else if (newHeight === this.options.maxHeight) {
+                _deltaY = this.options.maxHeight - this.startHeight
+                newTop = this.startTop - _deltaY
+            }
         }
 
         // 应用新尺寸和位置
@@ -193,10 +261,21 @@ export default class DragController {
             })
         }
 
-        if (this.callback) this.callback({
-            newWidth,
-            newHeight
-        })
+
+        if (this.callback) {
+            let params = null
+            switch (this.type) {
+                case 'draw':
+                    params = {
+                        newWidth,
+                        newHeight
+                    }
+                    break;
+                default:
+                    break;
+            }
+            this.callback(params)
+        }
     }
     doDrag(e) {
         const deltaX = e.clientX - this.startX
@@ -226,5 +305,21 @@ export default class DragController {
         this.isDragging = false
         this.currentHandle = null
         document.body.style.userSelect = ""
+    }
+    getSize(type, value) {
+        switch (type) {
+            case 'max-width':
+                return Math.max(
+                    this.options.minWidth,
+                    Math.min(this.options.maxWidth, value)
+                )
+            case 'max-height':
+                return Math.max(
+                    this.options.minHeight,
+                    Math.min(this.options.maxHeight, value)
+                )
+            default: 
+                return false
+        }
     }
 }
