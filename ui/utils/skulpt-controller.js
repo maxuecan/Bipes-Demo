@@ -23,7 +23,7 @@ export default class SkulptController extends Common {
     }
     // 输出内容，将结果输出在终端
     outF(text) {
-        console.log($('.control-preview').css('visibility'))
+        // console.log($('.control-preview').css('visibility'))
         term.write(text + '\r')
     }
     buildinRead(file) {

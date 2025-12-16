@@ -5,6 +5,7 @@ import DragController from '../utils/drag-controller'
 export default class DrawPreview extends Common {
     constructor() {
         super()
+        // 创建拖拽容器
         this.element = new DragController(
             document.getElementsByClassName('draw-preview')[0],
             {
