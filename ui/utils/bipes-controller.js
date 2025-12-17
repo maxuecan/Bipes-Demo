@@ -10,15 +10,14 @@ import EventEmitterController from './event-emitter-controller.js'
 export default class BipesController extends Common {
     constructor() {
         super()
-
-        this._settings = this.getLocalSettings()
-
         this.SKULPT_CONSTROLER = new SkulptController()
 
         this.CODE_PREVIEW = new CodePreview()
         this.CONTROL_PREVIEW = new ControlPreview()
         this.SETTING_PREVIEW = new SettingPreview()
         this.DRAW_PREVIEW = new DrawPreview()
+
+        this._settings = this.getLocalSettings()
     }
 
     initEvent() {
@@ -56,9 +55,11 @@ export default class BipesController extends Common {
             const storedSettings = localStorage.getItem('settings')
             if (storedSettings) {
                 settings = JSON.parse(storedSettings)
+                this.SETTING_PREVIEW.updateView(settings.mode)
             } else {
                 settings = { mode: 'hardware' }
                 localStorage.setItem('settings', JSON.stringify(settings))
+                this.SETTING_PREVIEW.updateView('hardware')
             }
             return settings
         } catch (error) {

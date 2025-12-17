@@ -1060,8 +1060,14 @@ button.icon.medium:before  {
   background: url(./media/new-icon/code-off.png) center / cover;
 }
 #consolePreviewButton {
+  display: none;
   margin: 5px 0 0 15px;
   background: url(./media/new-icon/console-off.png) center / cover;
+}
+#skulptPreviewButton {
+  display: none;
+  margin: 5px 0 0 15px;
+  background: url(./media/new-icon/skulpt-off.png) center / cover;
 }
 #settingsButton {
   margin: 5px 0 0 15px;
@@ -1268,8 +1274,8 @@ button.icon.medium:before  {
   position: absolute;
   left: 0;
   top: 0;
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   min-width: 400px;
   min-height: 400px;
   border-radius: 8px;

@@ -23,7 +23,6 @@ export default class DrawPreview extends Common {
                 })
                 window.Sk.TurtleGraphics.width = newWidth
                 window.Sk.TurtleGraphics.height = newHeight - 52
-                // console.log(params)
             }
         )
 
@@ -36,6 +35,10 @@ export default class DrawPreview extends Common {
     initEvent() {
         $('.draw-close').on('click', () => {
             this.changeCode(false)
+        })
+
+        $('#skulptPreviewButton').on('click', () => {
+            this.changeCode(!this.state)
         })
     }
     // 显示隐藏预览区

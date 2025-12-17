@@ -19,6 +19,13 @@ export default class SettingPreview extends Common {
         $('#save-settings').on('click', this.saveSettings.bind(this))
     }
     changeSetting(state) {
+        let c_vis = $('.control-preview').css('visibility')
+        let d_vis =$('.draw-preview').css('visibility')
+        if (c_vis === 'visible' || d_vis === 'visible') {
+            UI['notify'].send('请关闭预览窗口')
+            return false
+        }
+
         let status = state ? 'on' : 'off'
         $('.settings-preview').css('visibility', (state ? 'visible' : 'hidden'))
         $('#settingsButton').css('background', `url(../media/new-icon/setting-${status}.png) center / cover`)
@@ -47,7 +54,7 @@ export default class SettingPreview extends Common {
         
         try {
             localStorage.setItem('settings', JSON.stringify(settings));
-            console.log('设置已保存:', settings);
+            this.updateView(settings.mode)
         } catch (error) {
             console.error('保存设置失败:', error);
         }
@@ -69,5 +76,12 @@ export default class SettingPreview extends Common {
         } catch (error) {
             console.error('加载设置失败:', error);
         }
+    }
+
+    // 更新视图按钮
+    updateView(type) {
+        $('#channel_connect').css('display', type === 'hardware' ? 'flex' : 'none')
+        $('#consolePreviewButton').css('display', type === 'turtle' ? 'none' : 'block')
+        $('#skulptPreviewButton').css('display', type === 'turtle' ? 'block' : 'none')
     }
 }
