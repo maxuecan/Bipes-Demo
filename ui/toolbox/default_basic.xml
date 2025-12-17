@@ -1,5 +1,5 @@
 <document>
-    <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
+    <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}" css-selected="block-selected">
       <block type="controls_if"></block>
       <block type="controls_ifelse"></block>
       <block type="controls_if_else"></block>
@@ -27,7 +27,7 @@
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="%{BKY_CATLOOPS}" colour="%{BKY_LOOPS_HUE}">
+    <category name="%{BKY_CATLOOPS}" colour="%{BKY_LOOPS_HUE}" css-selected="block-selected">
       <block type="control_forever"></block>
       <block type="control_repeat_until"></block>
       <block type="control_wait_until">
@@ -66,7 +66,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="%{BKY_CATMATH}" colour="%{BKY_MATH_HUE}">
+    <category name="%{BKY_CATMATH}" colour="%{BKY_MATH_HUE}" css-selected="block-selected">
       <block type="math_number">
         <field name="NUM">123</field>
       </block>
@@ -207,7 +207,7 @@
         </value>
       </block>
     </category>
-    <category name="%{BKY_CATTEXT}" colour="%{BKY_TEXTS_HUE}">
+    <category name="%{BKY_CATTEXT}" colour="%{BKY_TEXTS_HUE}" css-selected="block-selected">
       <block type="text"></block>
       <block type="text_join"></block>
       <block type="text_append">
@@ -367,7 +367,7 @@
         </value>
       </block>
     </category>
-    <category name="%{BKY_CATLISTS}" colour="%{BKY_LISTS_HUE}">
+    <category name="%{BKY_CATLISTS}" colour="%{BKY_LISTS_HUE}" css-selected="block-selected">
       <block type="lists_create_with">
         <mutation items="0"></mutation>
       </block>
@@ -465,7 +465,7 @@
       <!-- <block type="lists_my_plugin"></block> -->
     </category>
 
-    <category name="%{BKY_catTuple}" colour="%{BKY_LISTS_HUE}">
+    <category name="%{BKY_catTuple}" colour="%{BKY_LISTS_HUE}" css-selected="block-selected">
       <block type="tuple_create_with">
         <mutation items="0"></mutation>
       </block>
@@ -549,7 +549,7 @@
       <block type="tuple_to_tuple"></block>
     </category>
 
-    <category name="%{BKY_catDict}" colour="%{BKY_LISTS_HUE}">
+    <category name="%{BKY_catDict}" colour="%{BKY_LISTS_HUE}" css-selected="block-selected">
       <block type="dicts_create_with">
         <mutation items="0"></mutation>
       </block>
@@ -698,7 +698,7 @@
       </block>
     </category>
 
-    <category name="%{BKY_catSet}" colour="%{BKY_LISTS_HUE}">
+    <category name="%{BKY_catSet}" colour="%{BKY_LISTS_HUE}" css-selected="block-selected">
       <block type="set_create_with">
         <mutation items="0"></mutation>
       </block>
@@ -786,7 +786,7 @@
       </block>
     </category>
 
-    <category name="串口" colour="%{BKY_LISTS_HUE}">
+    <!-- <category name="串口" colour="%{BKY_LISTS_HUE}">
       <block type="serial_init">
         <value name="RX">
           <shadow type="math_number">
@@ -838,9 +838,9 @@
       <block type="serial_read"></block>
       <block type="serial_readline"></block>
       <block type="serial_read_others"></block>
-    </category>
+    </category> -->
 
-    <category name="文件" colour="%{BKY_LISTS_HUE}">
+    <!-- <category name="文件" colour="%{BKY_LISTS_HUE}">
       <block type="file_is_writable">
         <value name="TEXT">
           <block type="variables_get">
@@ -855,13 +855,13 @@
           </block>
         </value>
       </block>
-      <!-- <block type="file_close">
+      <block type="file_close">
         <value name="TEXT">
           <block type="variables_get">
             <field name="VAR">{filesVariable}</field>
           </block>
         </value>
-      </block> -->
+      </block>
       <block type="file_listdir"></block>
       <block type="file_getcwd"></block>
       <block type="file_chdir">
@@ -916,9 +916,9 @@
           </shadow>
         </value>
       </block>
-    </category>
+    </category> -->
 
-    <category name="输入/输出" colour="%{BKY_LISTS_HUE}">
+    <!-- <category name="输入/输出" colour="%{BKY_LISTS_HUE}">
       <block type="io_rate"></block>
       <block type="io_init_pin">
         <value name="PIN">
@@ -1009,10 +1009,10 @@
           </shadow>
         </value>
       </block>
-    </category>
+    </category> -->
 
-    <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
-    <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+    <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE" css-selected="block-selected"></category>
+    <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE" css-selected="block-selected"></category>
 
     <!-- <category name="海龟" colour="%{BKY_TURTLE_HUE}">
       <block type="variables_set" id="fg004w+XJ=maCm$V7?3T" x="238" y="138">
