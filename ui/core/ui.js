@@ -26,7 +26,7 @@ panel.prototype.showPanel = function () {
   let panel_ = UI['responsive'].panels[this.panel_];
 
   UI['responsive'].closeZone._dom.classList.add('on')
-
+  $('.channel-panel').css('zIndex', '999')
   if (!panel_.show) {
     this.panel.id = "show";
     if (panel_.from == 'notify-panel')
@@ -35,6 +35,7 @@ panel.prototype.showPanel = function () {
     this.panel.id = '';
   }
   panel_.show = !panel_.show;
+
   if (this.onOpenPanel_ != undefined)
     this.onOpenPanel_();
 }
@@ -420,6 +421,7 @@ responsive.prototype.hidePanels = function (ev) {
     this.panels[prop].show = false
   }
   this.closeZone._dom.classList.remove('on')
+  $('.channel-panel').css('zIndex', '-1')
 }
 
 /** Show a progress bar under the DOM `.top-menu`. */
