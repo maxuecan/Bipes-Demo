@@ -192,9 +192,14 @@
         Address: <input type="text" name="webrepl_url" id="url" value="ws://192.168.0.35:8266/" />
         Password: <input type="password" name="webrepl_pass" id="password" value="bipes" />
       </span>
-      <button class="icon" value="Scan boards" id="scanButton"
-        onclick="window.open('ports.html','popup','width=600,height=600'); return false;" target="popup">Scan
-        devices</button>
+      <button 
+        class="icon" 
+        value="Scan boards" 
+        id="scanButton"
+        target="popup"
+      >
+        Scan devices
+      </button>
     </div>
   </div>
 
@@ -334,122 +339,120 @@
   <div class="notify"></div>
   <div class="notify-panel"></div>
 
-  <div>
-    <script>
-      // Init blockly
-      Code.init();
+  <script>
+    // Init blockly
+    Code.init();
 
-      /* global WebSocket, WebSerial and Bluetooth variable and functions (see core/channel.js) */
-      var Channel = {};
-      Channel['websocket'] = new websocket();
-      Channel['webserial'] = new webserial();
-      Channel['webbluetooth'] = new webbluetooth();
-      Channel['mux'] = new mux();
+    /* global WebSocket, WebSerial and Bluetooth variable and functions (see core/channel.js) */
+    var Channel = {};
+    Channel['websocket'] = new websocket();
+    Channel['webserial'] = new webserial();
+    Channel['webbluetooth'] = new webbluetooth();
+    Channel['mux'] = new mux();
 
-      //global terminal variable
-      var terminal = new Terminal();
-      term.init('#term') //init expanded class;
+    //global terminal variable
+    var terminal = new Terminal();
+    term.init('#term') //init expanded class;
 
-      //global Utilities variable and functions (see core/utils.js)
-      var Files = new files('#fileList');
+    //global Utilities variable and functions (see core/utils.js)
+    var Files = new files('#fileList');
 
-      // global User Interface variable and functions (see core/ui.js) */
-      var UI = {};
-      UI['responsive'] = new responsive();
-      UI['notify'] = new notify();
-      UI['progress'] = new progress();
-      // UI['account'] = new account('#accountButton', '.account-panel');
-      UI['notify-panel'] = new panel('#notificationButton', '.notify-panel');
-      UI['channel-panel'] = new channelPanel('#channelButton', '.channel-panel');
-      UI['toolbar'] = new panel('#toolbarButton', '.toolbar');
-      UI['workspace'] = new workspace();
+    // global User Interface variable and functions (see core/ui.js) */
+    var UI = {};
+    UI['responsive'] = new responsive();
+    UI['notify'] = new notify();
+    UI['progress'] = new progress();
+    // UI['account'] = new account('#accountButton', '.account-panel');
+    UI['notify-panel'] = new panel('#notificationButton', '.notify-panel');
+    UI['channel-panel'] = new channelPanel('#channelButton', '.channel-panel');
+    UI['toolbar'] = new panel('#toolbarButton', '.toolbar');
+    UI['workspace'] = new workspace();
 
 
-      //Make sure we wont use data from last session (BIPES serial to freeboard bridge)
-      Tool.clearQueue();
+    //Make sure we wont use data from last session (BIPES serial to freeboard bridge)
+    Tool.clearQueue();
 
-      window.onload = function () {
-        checkCookie()
-        // loadPage(); //Load modal splash screen
+    window.onload = function () {
+      checkCookie()
+      // loadPage(); //Load modal splash screen
 
-        //i18n
-        //Auto detect user language (from the browser)
-        var userLang = navigator.language || navigator.userLanguage + " ";
-        //alert ("The language is: " + userLang);
-        var addMsg = "";
+      //i18n
+      //Auto detect user language (from the browser)
+      var userLang = navigator.language || navigator.userLanguage + " ";
+      //alert ("The language is: " + userLang);
+      var addMsg = "";
 
-        //Also, detect language from the URL
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        pLang = urlParams.get('lang')
+      //Also, detect language from the URL
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      pLang = urlParams.get('lang')
 
-        if (!userLang)
-          userLang = 'en';
-        if (!pLang)
-          pLang = 'en';
+      if (!userLang)
+        userLang = 'en';
+      if (!pLang)
+        pLang = 'en';
 
-        if ((userLang.startsWith("pt")) || (pLang.startsWith("pt"))) {
-          addMsg = "<p><a href=/beta2/ui/?lang=pt-br>Acessar o BIPES em Português</a>";
-          addMsg += " | <a href=/beta2/ui/?lang=en>Access BIPES in English</a>";
-        }
+      if ((userLang.startsWith("pt")) || (pLang.startsWith("pt"))) {
+        addMsg = "<p><a href=/beta2/ui/?lang=pt-br>Acessar o BIPES em Português</a>";
+        addMsg += " | <a href=/beta2/ui/?lang=en>Access BIPES in English</a>";
+      }
 
-        // if (MSG["splash_welcome"])
-        //   document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
-        // else
-        //   document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
+      // if (MSG["splash_welcome"])
+      //   document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
+      // else
+      //   document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
 
-        // if (MSG["splash_message"])
-        //   document.getElementById("modalMsg").innerHTML = MSG["splash_message"] + addMsg;
-        // else
-        //   document.getElementById("modalMsg").innerHTML = "<p><b>**BIPES: Block based Integrated Platform for Embedded Systems</B> allows text and block based programming for several types of embedded systems and Internet of Things modules using MicroPython, CircuitPython, Python or Snek. You can connect, program, debug and monitor several types of boards using network, USB or Bluetooth. Please check a list of <a href=https://bipes.net.br/wp/boards/>compatible boards here</a>. Compatible boards include STM32, ESP32, ESP8266, Raspberry Pi Pico and even Arduino.  <p><b>BIPES</b> is fully <a href=https://bipes.net.br/wp/development/>open source</a> and based on HTML and JavaScript, so no software install or configuration is needed and you can use it offline! We hope BIPES is useful for you and that you can enjoy using BIPES. If you need help, we now have a <a href=https://github.com/BIPES/BIPES/discussions>discussion forum</a>, where we also post <a href=https://github.com/BIPES/BIPES/discussions/categories/announcements>new features and announcements about BIPES</a>. Feel free to use it! Also, we invite you to use the forum to leave feedbacks and suggestions for BIPES!</p><p>Checkout BIPES Book: <a href=https://bipes.net.br/wp/book-livro/>https://bipes.net.br/wp/book-livro/</a></p> <p>Thank you from the BIPES Team!</p>" + addMsg;
+      // if (MSG["splash_message"])
+      //   document.getElementById("modalMsg").innerHTML = MSG["splash_message"] + addMsg;
+      // else
+      //   document.getElementById("modalMsg").innerHTML = "<p><b>**BIPES: Block based Integrated Platform for Embedded Systems</B> allows text and block based programming for several types of embedded systems and Internet of Things modules using MicroPython, CircuitPython, Python or Snek. You can connect, program, debug and monitor several types of boards using network, USB or Bluetooth. Please check a list of <a href=https://bipes.net.br/wp/boards/>compatible boards here</a>. Compatible boards include STM32, ESP32, ESP8266, Raspberry Pi Pico and even Arduino.  <p><b>BIPES</b> is fully <a href=https://bipes.net.br/wp/development/>open source</a> and based on HTML and JavaScript, so no software install or configuration is needed and you can use it offline! We hope BIPES is useful for you and that you can enjoy using BIPES. If you need help, we now have a <a href=https://github.com/BIPES/BIPES/discussions>discussion forum</a>, where we also post <a href=https://github.com/BIPES/BIPES/discussions/categories/announcements>new features and announcements about BIPES</a>. Feel free to use it! Also, we invite you to use the forum to leave feedbacks and suggestions for BIPES!</p><p>Checkout BIPES Book: <a href=https://bipes.net.br/wp/book-livro/>https://bipes.net.br/wp/book-livro/</a></p> <p>Thank you from the BIPES Team!</p>" + addMsg;
 
-        // if (MSG["splash_footer"])
-        //   document.getElementById("modalFooter").innerHTML = MSG["splash_footer"];
-        // else
-        //   document.getElementById("modalFooter").innerHTML = "Do not show this screen again";
+      // if (MSG["splash_footer"])
+      //   document.getElementById("modalFooter").innerHTML = MSG["splash_footer"];
+      // else
+      //   document.getElementById("modalFooter").innerHTML = "Do not show this screen again";
 
-        // if (MSG["splash_close"])
-        //   document.getElementById("modalClose").innerHTML = MSG["splash_close"];
-        // else
-        //   document.getElementById("modalClose").innerHTML = "Close";
+      // if (MSG["splash_close"])
+      //   document.getElementById("modalClose").innerHTML = MSG["splash_close"];
+      // else
+      //   document.getElementById("modalClose").innerHTML = "Close";
 
-        //if (userLang.startsWith("pt")) {
-        //	//alert("pt");
-        //	document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
-        //} else {
-        //	//alert("en");
-        //	if (MSG["splash_welcome"]) {
-        //		document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
-        //	}
-        //	else {
-        //		document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
-        //	}
-        //}
+      //if (userLang.startsWith("pt")) {
+      //	//alert("pt");
+      //	document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
+      //} else {
+      //	//alert("en");
+      //	if (MSG["splash_welcome"]) {
+      //		document.getElementById("modalTitle").innerHTML = MSG["splash_welcome"];
+      //	}
+      //	else {
+      //		document.getElementById("modalTitle").innerHTML = "Welcome to BIPES!";
+      //	}
+      //}
 
-        //BIPES keyboad hotkeys
-        //Source: http://www.openjs.com/scripts/events/keyboard_shortcuts/
-        //Includes core/shortcut.js
-        shortcut.add("Ctrl+Shift+L", function () {
-          //alert("BIPES hotkey: screenshot!");
-          Tool.exportScreenshot();
-        });
+      //BIPES keyboad hotkeys
+      //Source: http://www.openjs.com/scripts/events/keyboard_shortcuts/
+      //Includes core/shortcut.js
+      shortcut.add("Ctrl+Shift+L", function () {
+        //alert("BIPES hotkey: screenshot!");
+        Tool.exportScreenshot();
+      });
 
-        shortcut.add("Ctrl+Shift+E", function () {
-          //alert("BIPES hotkey: Run program and switch to console!");
-          Code.handleLink('console', 1)
-          Tool.runPython();
-        });
+      shortcut.add("Ctrl+Shift+E", function () {
+        //alert("BIPES hotkey: Run program and switch to console!");
+        Code.handleLink('console', 1)
+        Tool.runPython();
+      });
 
-        shortcut.add("Ctrl+Shift+R", function () {
-          //alert("BIPES hotkey: Run program!");
-          Tool.runPython();
-        });
+      shortcut.add("Ctrl+Shift+R", function () {
+        //alert("BIPES hotkey: Run program!");
+        Tool.runPython();
+      });
 
-        shortcut.add("Ctrl+Shift+S", function () {
-          //alert("BIPES hotkey: Stop program!");
-          Tool.stopPython();
-        });
-      };
-    </script>
-  </div>
+      shortcut.add("Ctrl+Shift+S", function () {
+        //alert("BIPES hotkey: Stop program!");
+        Tool.stopPython();
+      });
+    };
+  </script>
 </html>

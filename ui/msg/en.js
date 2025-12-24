@@ -19,7 +19,7 @@ var MSG = {
   catFunctions: "Functions",
   listVariable: "list",
   textVariable: "text",
-   tupleVariable: "元组",
+  tupleVariable: "元组",
   dictVariable: "字典",
   setVariable: "集合",
   setVariable2: "集合2",
@@ -58,7 +58,7 @@ var MSG = {
   serialFroozen: "Serial connection is unresponsive.",
   notAvailableFlag: "$1 is not available on your browser.\r\nPlease make sure the $1 flag is enabled.",
 
-//Blocks
+  //Blocks
   block_delay: "delay",
   seconds: "seconds",
   milliseconds: "milliseconds",
@@ -117,7 +117,7 @@ var MSG = {
   dht_humi: "get DHT11/22 humidity",
   type: "type",
 
-//Network
+  //Network
   net_http_get: "HTTP GET Request",
   net_http_get_status: "HTTP Status code",
   net_http_get_content: "HTTP Response content",
@@ -128,13 +128,13 @@ var MSG = {
   net_http_server_send_response: "Send HTTP Response",
   net_http_server_send_html: "HTML",
 
-//Splash screen
+  //Splash screen
   splash_welcome: "Welcome to BIPES!",
   splash_footer: "Do not show this screen again",
   splash_close: "Close",
   splash_message: "<p><b>BIPES: Block based Integrated Platform for Embedded Systems</B> allows text and block based programming for several types of embedded systems and Internet of Things modules using MicroPython, CircuitPython, Python or Snek. You can connect, program, debug and monitor several types of boards using network, USB or Bluetooth. Please check a list of <a href=https://bipes.net.br/wp/boards/>compatible boards here</a>. Compatible boards include STM32, ESP32, ESP8266, Raspberry Pi Pico and even Arduino.  <p><b>BIPES</b> is fully <a href=https://bipes.net.br/wp/development/>open source</a> and based on HTML and JavaScript, so no software install or configuration is needed and you can use it offline! We hope BIPES is useful for you and that you can enjoy using BIPES. If you need help, we now have a <a href=https://github.com/BIPES/BIPES/discussions>discussion forum</a>, where we also post <a href=https://github.com/BIPES/BIPES/discussions/categories/announcements>new features and announcements about BIPES</a>. Feel free to use it! Also, we invite you to use the forum to leave feedbacks and suggestions for BIPES!</p><p>Now you can easily load MicroPython on your ESP32 or ESP8226 to use with BIPES: <a href=https://bipes.net.br/flash/esp-web-tools/>https://bipes.net.br/flash/esp-web-tools/</a></p><p>Checkout BIPES Book at <a href=https://bipes.net.br/wp/book-livro/>https://bipes.net.br/wp/book-livro/</a></p> <p>Thank you from the BIPES Team!</p>"
 
-  
+
 
 };
 

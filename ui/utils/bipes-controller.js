@@ -3,6 +3,7 @@ import CodePreview from '../components/code-preview.js'
 import ControlPreview from '../components/control-preview.js'
 import SettingPreview from '../components/setting-preview.js'
 import DrawPreview from '../components/draw-preview.js'
+import SearcgDevice from '../components/search-device.js'
 
 import SkulptController from './skulpt-controller.js'
 import EventEmitterController from './event-emitter-controller.js'
@@ -16,6 +17,7 @@ export default class BipesController extends Common {
         this.CONTROL_PREVIEW = new ControlPreview()
         this.SETTING_PREVIEW = new SettingPreview()
         this.DRAW_PREVIEW = new DrawPreview()
+        this.SEARCH_DEVICE = null
 
         this._settings = this.getLocalSettings()
     }
@@ -23,6 +25,8 @@ export default class BipesController extends Common {
     initEvent() {
         // 运行按钮
         $('#bipes-run').on('click', this.bipesRun.bind(this))
+        // 搜索按钮
+        $('#scanButton').on('click', this.openSearchDevice.bind(this))
     }
     
     // 运行 
@@ -70,5 +74,12 @@ export default class BipesController extends Common {
     }
     getSettings() {
         return this._settings;
+    }
+    // 构建搜索设备
+    openSearchDevice() {
+        if (!this.SEARCH_DEVICE) this.SEARCH_DEVICE = new SearcgDevice()
+        
+        $('body').append(this.SEARCH_DEVICE.render())
+        this.SEARCH_DEVICE.initEvent()
     }
 }
