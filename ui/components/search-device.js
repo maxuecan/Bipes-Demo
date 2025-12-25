@@ -1,4 +1,4 @@
-export default class SearcgDevice {
+export default class SearchDevice {
     constructor() {
         this.search_list = [] // 搜索到的设备列表
         this.search_act = -1

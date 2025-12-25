@@ -3,7 +3,7 @@ import CodePreview from '../components/code-preview.js'
 import ControlPreview from '../components/control-preview.js'
 import SettingPreview from '../components/setting-preview.js'
 import DrawPreview from '../components/draw-preview.js'
-import SearcgDevice from '../components/search-device.js'
+import SearchDevice from '../components/search-device.js'
 
 import SkulptController from './skulpt-controller.js'
 import EventEmitterController from './event-emitter-controller.js'
@@ -77,7 +77,7 @@ export default class BipesController extends Common {
     }
     // 构建搜索设备
     openSearchDevice() {
-        if (!this.SEARCH_DEVICE) this.SEARCH_DEVICE = new SearcgDevice()
+        if (!this.SEARCH_DEVICE) this.SEARCH_DEVICE = new SearchDevice()
         
         $('body').append(this.SEARCH_DEVICE.render())
         this.SEARCH_DEVICE.initEvent()
