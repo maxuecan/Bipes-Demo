@@ -4,6 +4,8 @@ import ControlPreview from '../components/control-preview.js'
 import SettingPreview from '../components/setting-preview.js'
 import DrawPreview from '../components/draw-preview.js'
 import SearchDevice from '../components/search-device.js'
+import ExtensionsBtn from '../components/extensions-btn.js'
+import ExtensionsDialog from '../components/extensions-dialog.js'
 
 import SkulptController from './skulpt-controller.js'
 import EventEmitterController from './event-emitter-controller.js'
@@ -18,8 +20,31 @@ export default class BipesController extends Common {
         this.SETTING_PREVIEW = new SettingPreview()
         this.DRAW_PREVIEW = new DrawPreview()
         this.SEARCH_DEVICE = null
+        this.EXTENSIONS_DIALOG = null
 
         this._settings = this.getLocalSettings()
+
+        this.EXTENSIONS_BTN = new ExtensionsBtn({
+            settings: this._settings
+        })
+
+        EventEmitterController.on('extensions-dialog-change', (state) => {
+            if (state) {
+                this.openExtensionsDialog()
+            }
+        })
+        EventEmitterController.on('reset-mode', async (mode) => {
+            if (['hardware', 'offline'].includes(mode)) {
+                // 重置toolbox
+                if (this.EXTENSIONS_DIALOG) {
+                    await this.EXTENSIONS_DIALOG.resetToolbox()
+                }
+            }
+            
+            // 重置扩展按钮
+            $('#extensions-btn').css('display', mode === 'turtle' ? 'block' : 'none')
+            this.EXTENSIONS_BTN.resetPostion()
+        })
     }
 
     initEvent() {
@@ -81,5 +106,11 @@ export default class BipesController extends Common {
         
         $('body').append(this.SEARCH_DEVICE.render())
         this.SEARCH_DEVICE.initEvent()
+    }
+    // 显示扩展弹窗
+    openExtensionsDialog() {
+        if (!this.EXTENSIONS_DIALOG) this.EXTENSIONS_DIALOG = new ExtensionsDialog()
+        
+        this.EXTENSIONS_DIALOG.show()
     }
 }

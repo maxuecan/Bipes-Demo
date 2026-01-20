@@ -1,3 +1,4 @@
+import EventEmitterController from '../utils/event-emitter-controller'
 import Common from "./common";
 
 export default class SettingPreview extends Common {
@@ -55,6 +56,8 @@ export default class SettingPreview extends Common {
         try {
             localStorage.setItem('settings', JSON.stringify(settings));
             this.updateView(settings.mode)
+
+            EventEmitterController.emit('on-reset-mode', selectedMode)
         } catch (error) {
             console.error('保存设置失败:', error);
         }

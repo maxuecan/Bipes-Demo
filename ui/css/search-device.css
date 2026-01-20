@@ -52,7 +52,7 @@
     font-size: 1.000em;
     font-family: Source Han Sans CN-Regular;
     color: #ffffff;
-    background: rgba(52, 152, 219, 0.7);
+    background: #3498db;
     cursor: pointer;
 }
 
@@ -123,7 +123,7 @@
     border-radius: 0.250em;
     padding: 0.688em 2.000em;
     font-size: 1.000em;
-    background: rgba(52, 152, 219, 0.7);
+    background: #3498db;
     color: #FFFFFF;
     cursor: pointer;
 }

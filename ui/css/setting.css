@@ -110,12 +110,12 @@
 }
 
 .btn-primary {
-  background-color: rgba(52, 152, 219, 0.7);
+  background-color: #3498db;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: rgba(52, 152, 219, 0.7);
+  background-color: #3498db;
 }
 
 .btn-secondary {

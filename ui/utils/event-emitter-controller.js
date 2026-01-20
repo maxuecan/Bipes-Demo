@@ -11,6 +11,12 @@ class EventEmitterController extends EventEmitter {
         this.on('open-draw-preview', () => {
             this.emit('draw-preview-change', true)
         })
+        this.on('open-extensions-dialog', () => {
+            this.emit('extensions-dialog-change', true)
+        })
+        this.on('on-reset-mode', (mode) => {
+            this.emit('reset-mode', mode)
+        })
     }
 }
 

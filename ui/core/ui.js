@@ -604,10 +604,12 @@ workspace.prototype.change = function () {
 
     if (!!selected.toolbox) { // checks if toolbox is set
       xhrGET(`toolbox/${selected.toolbox}`, 'document', (XML_) => {
+        window._xml = XML_
         Code.reloadToolbox(XML_);
       });
     } else {
       xhrGET(`toolbox/${this.defaultToolbox}`, 'document', (XML_) => {
+        window._xml = XML_
         Code.reloadToolbox(XML_);
       });
       UI['notify'].send(MSG['noToolbox']);

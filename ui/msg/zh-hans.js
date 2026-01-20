@@ -24,6 +24,7 @@ var MSG = {
   setVariable: "集合",
   setVariable2: "集合2",
   filesVariable: "f",
+  turtleVariable: "海龟",
   catTuple: "元组",
   catDict: "字典",
   catSet: "集合",
