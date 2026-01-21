@@ -1,6 +1,6 @@
 import Common from "./common";
-import EventEmitterController from '../utils/event-emitter-controller'
-import DragController from '../utils/drag-controller'
+import EventEmitterController from '@/utils/event-emitter-controller'
+import DragController from '@/utils/drag-controller'
 
 export default class DrawPreview extends Common {
     constructor() {

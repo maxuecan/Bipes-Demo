@@ -1,5 +1,5 @@
-import EventEmitterController from '../utils/event-emitter-controller'
-import DragController from '../utils/drag-controller'
+import EventEmitterController from '@/utils/event-emitter-controller'
+import DragController from '@/utils/drag-controller'
 
 export default class ControlPreview {
     constructor() {

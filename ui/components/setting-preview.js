@@ -1,4 +1,4 @@
-import EventEmitterController from '../utils/event-emitter-controller'
+import EventEmitterController from '@/utils/event-emitter-controller'
 import Common from "./common";
 
 export default class SettingPreview extends Common {

@@ -209,9 +209,14 @@ module.exports = {
             logging: "none",
             overlay: true,
         },
-        https: true,
+        // https: true,
         static: {
             directory: path.join(__dirname, "/media"),
         }
     },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname)
+        }
+    }
 };

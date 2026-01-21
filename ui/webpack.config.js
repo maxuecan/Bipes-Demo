@@ -331,5 +331,10 @@ module.exports = {
       //   ws: true
       // }
     }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname)
+    }
   }
 }

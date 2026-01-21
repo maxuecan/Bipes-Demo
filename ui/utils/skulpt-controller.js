@@ -3,7 +3,7 @@ import * as Sk from 'skulpt';
 // 使用方式二
 // import 'skulpt/dist/skulpt.js';
 // import 'skulpt/dist/skulpt-stdlib.js';
-import Common from '../components/common'
+import Common from '@/components/common'
 
 export default class SkulptController extends Common {
     constructor() {

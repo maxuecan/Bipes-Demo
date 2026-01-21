@@ -1,5 +1,5 @@
-import EventEmitterController from '../utils/event-emitter-controller'
-import { resetPostion } from '../utils/utils'
+import EventEmitterController from '@/utils/event-emitter-controller'
+import { resetPostion } from '@/utils/utils'
 
 export default class extensionsBtn {
     constructor(props) {

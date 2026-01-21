@@ -1,5 +1,5 @@
-import ExtensionsList from '../config/extensions-blocks.js'
-import { resetPostion } from '../utils/utils'
+import ExtensionsList from '@/config/extensions-blocks.js'
+import { resetPostion } from '@/utils/utils'
 
 export default class extensionsDialog {
     constructor() {
