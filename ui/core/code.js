@@ -454,8 +454,9 @@ Code.reloadToolbox = function (XML_) {
 }
 
 function loadExampleFromURL(pName) {
+  Code.workspace.clear()
   var request = new XMLHttpRequest();
-  request.open('GET', '/beta2/ui/examples/hardware' + pName + '.xml', true);
+  request.open('GET', 'examples' + pName, true);
   //request.open('GET', 'http://bipes.net.br/beta2/ui/examples/' + pName + '.xml', true);
   request.send(null);
   request.onreadystatechange = function () {

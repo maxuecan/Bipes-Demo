@@ -6,6 +6,7 @@ import DrawPreview from '@/components/draw-preview.js'
 import SearchDevice from '@/components/search-device.js'
 import ExtensionsBtn from '@/components/extensions-btn.js'
 import ExtensionsDialog from '@/components/extensions-dialog.js'
+import ExamplePreview from '@/components/example-preview.js'
 
 import SkulptController from './skulpt-controller.js'
 import EventEmitterController from './event-emitter-controller.js'
@@ -19,6 +20,9 @@ export default class BipesController extends Common {
         this.CONTROL_PREVIEW = new ControlPreview()
         this.SETTING_PREVIEW = new SettingPreview()
         this.DRAW_PREVIEW = new DrawPreview()
+        this.EXAMPLE_PREVIEW = new ExamplePreview({
+            getLocalSettings: this.getLocalSettings
+        })
         this.SEARCH_DEVICE = null
         this.EXTENSIONS_DIALOG = null
 
@@ -44,6 +48,9 @@ export default class BipesController extends Common {
             // 重置扩展按钮
             $('#extensions-btn').css('display', mode === 'turtle' ? 'block' : 'none')
             this.EXTENSIONS_BTN.resetPostion()
+
+            // 重置案例内容
+            this.EXAMPLE_PREVIEW.reload(mode)
         })
     }
 
@@ -84,11 +91,11 @@ export default class BipesController extends Common {
             const storedSettings = localStorage.getItem('settings')
             if (storedSettings) {
                 settings = JSON.parse(storedSettings)
-                this.SETTING_PREVIEW.updateView(settings.mode)
+                if (this.SETTING_PREVIEW) this.SETTING_PREVIEW.updateView(settings.mode)
             } else {
                 settings = { mode: 'hardware' }
                 localStorage.setItem('settings', JSON.stringify(settings))
-                this.SETTING_PREVIEW.updateView('hardware')
+                if (this.SETTING_PREVIEW) this.SETTING_PREVIEW.updateView('hardware')
             }
             return settings
         } catch (error) {

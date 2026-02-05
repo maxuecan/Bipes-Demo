@@ -2,7 +2,7 @@
 export function resetPostion() {
     let dom = document.getElementsByClassName('blocklyToolboxContents')
     if (dom.length > 0) {
-        let h = document.body.offsetHeight - 52 - 54 // 页面高度 - 顶部高度 - 按钮高度
+        let h = document.body.offsetHeight - 52 - 54 - 23 // 页面高度 - 顶部高度 - 按钮高度
 
         let b_h = 0
         let len = dom[0].children.length

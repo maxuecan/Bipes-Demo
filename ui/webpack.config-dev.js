@@ -193,6 +193,10 @@ module.exports = {
                 {
                     from: path.resolve(__dirname, 'style.css'),
                     to: 'style.css' 
+                },
+                {
+                    from: path.resolve(__dirname, 'examples'),
+                    to: 'examples'
                 }
             ]
         })
