@@ -357,7 +357,7 @@ input.checkswitch[type="checkbox"] {
 }
 .tabs > div.on:hover {
   color: #fff !important;
-  background-color: #2563eb;
+  background-color: #3498db;
 }
 table {
   border-collapse: collapse;
