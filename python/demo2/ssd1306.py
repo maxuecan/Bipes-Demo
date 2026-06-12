@@ -29,11 +29,11 @@ class SSD1306:
         # 请注意，子类必须将self.framebuf初始化为帧缓冲区
         # 这是必要的，因为底层数据缓冲区不同
         # 在I2C和SPI实现之间（I2C需要额外的字节）
-        # self.poweron()
+        self.poweron()
         self.init_display()
 
+    # 初始化OLED
     def init_display(self):
-        # 初始化OLED
         for cmd in (
             SET_DISP | 0x00, # 关闭显示
             # 地址设置
@@ -63,7 +63,28 @@ class SSD1306:
 
     # 用指定的颜色填充整个 FrameBuffer
     def fill(self, col):
+        self.framebuf.fill(col)
 
+    # 更新显示
+    def show(self):
+        x0 = 0
+        x1 = self.width - 1
+        if self.width == 64:
+            # 宽度为64像素的显示器偏移了32
+            x0 += 32
+            x1 += 32
+            # x0, x1 = 32, 95
+        self.write_cmd(SET_COL_ADDR)
+        self.write_cmd(x0)
+        self.write_cmd(x1)
+        self.write_cmd(SET_PAGE_ADDR)
+        self.write_cmd(0)
+        self.write_cmd(self.pages - 1)
+        self.write_framebuf()
+
+    # 
+    def pixel(self, x, y, col):
+        self.framebuf.pixel(x, y, col)
 
 class SSD1306_I2C(SSD1306):
     def __init__(self, width, height, i2c, addr=0x3c, external_vcc=False):
@@ -76,13 +97,24 @@ class SSD1306_I2C(SSD1306):
         # self.pages = self.height // 8
         self.buffer = bytearray(((height // 8) * width) + 1)
         # self.buffer = bytearray(self.pages * self.width)
-        self.framebuf = framebuf.FrameBuffer(self.buffer, self.width, self.height, framebuf.MONO_VLSB)
+        self.framebuf = framebuf.FrameBuffer(memoryview(self.buffer)[1:], self.width, self.height, framebuf.MONO_VLSB)
         super().__init__(width, height, external_vcc)
 
     def write_cmd(self, cmd):
-        # I2C.writeto_mem(addr, memaddr, buf, *, addrsize=8)
+        # API: I2C.writeto_mem(addr, memaddr, buf, *, addrsize=8)
         # 从memaddr指定的内存地址开始，将buf写入addr指定的从站。参数addrsize以位为单位指定地址大小
-        self.i2c.writeto_mem(self.addr, 0x00, bytes([cmd]))
-        # I2C.writeto(addr, buf, stop=True, /)
+        # self.i2c.writeto_mem(self.addr, 0x00, bytes([cmd]))
+        
+        # API: I2C.writeto(addr, buf, stop=True, /)
         # 将buf 中的字节写入addr指定的从站。如果在从buf写入一个字节后收到 NACK，则不会发送剩余的字节。如果stop为真，则在传输结束时生成 STOP 条件，即使收到 NACK 也是如此。该函数返回接收到的 ACK 数
+        self.temp[0] = 0x80 # Co=1, D/C#=0
+        self.temp[1] = cmd
         self.i2c.writeto(self.addr, self.temp)
+
+    def write_framebuf(self):
+        # 使用单个I2C事务来释放帧缓冲区以支持
+        # 硬件I2C接口。
+        self.i2c.writeto(self.addr, self.buffer)
+
+    def poweron(self):
+        pass
