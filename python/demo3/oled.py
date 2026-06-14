@@ -1,7 +1,6 @@
 from machine import Pin, I2C
-from ssd1306 import SSD1306_I2C
-
 from neopixel import NeoPixel
+from ssd1306 import SSD1306_I2C
 import time
 
 # -------------------------- 硬件配置 --------------------------
