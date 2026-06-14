@@ -24,9 +24,18 @@ class OLED():
     try:
       self.oled = self.init_hardware()
       self.scroll_offset = 128
-
+      print(self)
       # 初始LED状态设置
       self.control_leds()
+
+      while True:
+        # 刷新显示（文字和时间）
+        self.scroll_offset = self.display_all()
+            
+        # 检查LED控制状态（不影响显示刷新频率）
+        self.control_leds()
+            
+        time.sleep(0.05)
     
     except Exception as e:
       if 'oled' in locals():
@@ -37,7 +46,7 @@ class OLED():
       time.sleep(5)
   
   # 初始化硬件
-  def init_hardware():
+  def init_hardware(self):
     # API: machine.I2C(id, *, scl, sda, freq=400000)
     # id标识特定的 I2C 外设。允许的值取决于特定的端口/板
     # scl应该是一个 pin 对象，指定用于 SCL 的 pin。
@@ -49,7 +58,7 @@ class OLED():
     return oled
   
   # LED控制函数
-  def control_leds():
+  def control_leds(self):
     # 读取控制引脚状态
     if control_pin.value() == 1: # 高电平
       # 所有灯珠设为紫色
@@ -63,10 +72,11 @@ class OLED():
       np.write() # 刷新显示
 
   # 显示内容
-  def display(self, text):
+  def display(self):
+    
     while True:
       # 刷新显示（文字和时间）
-      # self.scroll_offset = display_all()
+      self.scroll_offset = self.display_all()
 
       # 检查LED控制状态（不影响显示刷新频率）
       self.control_leds()
@@ -74,7 +84,7 @@ class OLED():
       time.sleep(0.05)
 
   # 显示函数
-  def display_all(self, oled, scroll_offset):
+  def display_all(self):
     # 清屏
     self.oled.fill(0)
 
@@ -83,11 +93,18 @@ class OLED():
     y = 0
     for idx in range(14):
       if x + char_size > 0 and x < 128:
-        self.draw_16x16_char(oled, idx, x, y)
+        self.draw_16x16_char(idx, x, y)
       x += char_size + char_spacing
 
+    # 更新滚动偏移量
+    self.scroll_offset -= scroll_speed
+    total_width = 14 * (char_size + char_spacing) - char_spacing
+    if self.scroll_offset < -total_width:
+      self.scroll_offset = 128
+    return self.scroll_offset
+
   # 绘制16x16汉字 （阳码取模适配）
-  def draw_16x16_char(self, oled, char_index, x, y):
+  def draw_16x16_char(self, char_index, x, y):
     if 0 <= char_index < len(self.zh16x16):
       char_data = self.zh16x16[char_index]
       for col in range(16):
@@ -100,3 +117,4 @@ class OLED():
         for row in range(8):
           if byte2 & (1 << row):
             self.oled.pixel(x + col, y + 8 + row, 1)
+
