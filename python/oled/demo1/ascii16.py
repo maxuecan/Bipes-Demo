@@ -9,10 +9,11 @@ import sys
 _file = None
 
 
+
 def _get_ch(ch):
     global _file
     if _file is None:
-        _file = open(sys.path[1] + '/ssd1306py/ascii16.txt', 'r')
+        _file = open('./ascii16.txt', 'r')
 
     _file.seek(ord(ch) * 86)
     get_line = _file.readline()
@@ -20,7 +21,8 @@ def _get_ch(ch):
     data = []
     n = 0
     for v in get_line.split(','):
-        data.append(int(v, 16))
+        v = v.strip()
+        data.append(int(v))
         n += 1
         if n == 16:
             break
@@ -39,3 +41,4 @@ def display(oled, string, x_axis, y_axis):
             for x in range(0, 8):
                 oled.pixel(x_axis + offset + x, y + y_axis, int(a[x]))
         offset += 8
+

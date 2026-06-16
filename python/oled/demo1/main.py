@@ -10,7 +10,7 @@ _width = 128
 _height = 64
 
 
-def init_i2c(scl, sda, width, height, i2c=-1):
+def init_i2c(scl, sda, width, height, i2c):
     """
     初始化i2c接口
     :param scl: i2c的时钟脚
@@ -20,7 +20,8 @@ def init_i2c(scl, sda, width, height, i2c=-1):
     :param i2c: i2c口
     """
     global _oled, _width, _height
-    _i2c = machine.I2C(i2c, scl=machine.Pin(scl), sda=machine.Pin(sda))
+    # _i2c = machine.I2C(i2c, scl=machine.Pin(scl), sda=machine.Pin(sda))
+    _i2c = machine.I2C(0, scl=machine.Pin(1), sda=machine.Pin(0), freq=400000)
     _width = width
     _height = height
     _oled = ssd1306.SSD1306_I2C(_width, _height, _i2c)
@@ -85,8 +86,10 @@ def text_cn(string, x_axis, y_axis, font_size):
 
     
 if __name__ == "__main__":
-  init_i2c(0, 1, 128, 64)
+  init_i2c(0, 1, 128, 64, 0)
 
   clear()
-  text("Hello World", 0, 0, 16)
+  text("a", 0, 0, 16) # x: 126 y: 64
+  #text('1234567890987654', 0, 0 ,8)
   show()
+
