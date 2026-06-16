@@ -20,7 +20,7 @@ def _get_ch(ch):
     data = []
     n = 0
     for v in get_line.split(','):
-        data.append(int(v))
+        data.append(int(v, 16))
         n += 1
         if n == 16:
             break
