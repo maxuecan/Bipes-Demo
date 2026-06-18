@@ -81,6 +81,9 @@ class SSD1306:
     # 使用单个I2C事务来释放帧缓冲区以支持
     # 硬件I2C接口。
     self.i2c.writeto(self.addr, self.buffer)
+
+  def pixel(self, x, y, col):
+    self.framebuf.pixel(x, y, col)
     
 class SSD1306_I2C(SSD1306):
   def __init__(self, width, height, i2c, addr=0x3c, external_vcc=False):

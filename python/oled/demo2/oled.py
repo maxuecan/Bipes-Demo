@@ -32,3 +32,12 @@ class OLED:
     # 初始oled
     _oled = SSD1306_I2C(width, height, self.i2c)
     return _oled
+  
+  def text(self, string, x_axis, y_axis, font_size):
+    # 显示字符串，英文、数字
+    if font_size != 8 and font_size != 16 and font_size != 24 and font_size != 32:
+      return
+
+    if font_size == 8:
+      self.oled.text(string, x_axis, y_axis)
+      return
