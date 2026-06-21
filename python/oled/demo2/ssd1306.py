@@ -26,7 +26,7 @@ class SSD1306:
     self.height = height
     self.external_vcc = external_vcc
     self.pages = height // 8
-    # self.poweron()
+    self.poweron()
     self.init_display()
 
   def init_display(self):
@@ -77,27 +77,26 @@ class SSD1306:
     self.write_cmd(self.pages - 1)
     self.write_framebuf()
 
-  def write_framebuf(self):
-    # 使用单个I2C事务来释放帧缓冲区以支持
-    # 硬件I2C接口。
-    self.i2c.writeto(self.addr, self.buffer)
-
   def pixel(self, x, y, col):
     self.framebuf.pixel(x, y, col)
     
+  def text(self, string, x, y, col=1):
+    self.framebuf.text(string, x, y, col)
+
 class SSD1306_I2C(SSD1306):
   def __init__(self, width, height, i2c, addr=0x3c, external_vcc=False):
     self.i2c = i2c
     self.addr = addr
     self.temp = bytearray(2)
-    self.buffer = bytearray((height // 8) * width)
+    self.buffer = bytearray((height // 8) * width + 1)
+    self.buffer[0] = 0x40
     # framebuf.FrameBuffer(buffer, width, height, format, stride=width, /)
     # buffer：是一个具有缓冲协议的对象，该协议必须足够大以包含由 FrameBuffer 的宽度、高度和格式定义的每个像素
     # width：是FrameBuffer的宽度
     # height：是FrameBuffer的高度
     # format：指定了FrameBuffer中使用的像素类型；允许的值列在下面的常量下。这些设置用于编码颜色值的位数以及这些位在缓冲区中的布局。在将颜色值 c 传递给方法的情况下，c 是一个小整数，其编码取决于 FrameBuffer 的格式
     # stride：是FrameBuffer中每条水平像素线之间的像素数。这默认为宽度，但在另一个更大的 FrameBuffer 或屏幕中实现 FrameBuffer 时可能需要调整。所述缓冲器的大小必须容纳增加的步长大小
-    self.framebuf = framebuf.FrameBuffer(memoryview(self.buffer)[1:], width, height)
+    self.framebuf = framebuf.FrameBuffer1(memoryview(self.buffer)[1:], width, height)
     super().__init__(width, height, external_vcc)
 
   def poweron(self):
@@ -113,3 +112,8 @@ class SSD1306_I2C(SSD1306):
     # I2C.writeto_mem(addr, memaddr, buf, *, addrsize=8)
     # 从memaddr指定的内存地址开始，将buf写入addr指定的从站。参数addrsize以位为单位指定地址大小
     # self.i2c.writeto_mem(self.addr, 0x00, bytes([cmd]))
+
+  def write_framebuf(self):
+    # 使用单个I2C事务来释放帧缓冲区以支持
+    # 硬件I2C接口。
+    self.i2c.writeto(self.addr, self.buffer)

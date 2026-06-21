@@ -24,7 +24,7 @@ class OLED():
     try:
       self.oled = self.init_hardware()
       self.scroll_offset = 128
-      print(self)
+
       # 初始LED状态设置
       self.control_leds()
 
@@ -95,6 +95,8 @@ class OLED():
       if x + char_size > 0 and x < 128:
         self.draw_16x16_char(idx, x, y)
       x += char_size + char_spacing
+
+    self.oled.show()
 
     # 更新滚动偏移量
     self.scroll_offset -= scroll_speed

@@ -189,4 +189,3 @@ class OLED:
           if byte2 & (1 << row):
             oled.pixel(x + col, y + 8 + row, 1)
 
-
