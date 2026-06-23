@@ -41,8 +41,16 @@ class OLED:
     _oled = SSD1306_I2C(width, height, self.i2c)
     return _oled
   
+  def clear(self):
+    # 清屏
+    self.oled.fill(0)
+
+  def show(self):
+    # 显示
+    self.oled.show()
+
   def text(self, string, x, y, font_size=8):
-    # 显示字符串，英文、数字
+    # 显示8x8字符串，英文、数字
     if font_size != 8 and font_size != 16 and font_size != 24 and font_size != 32:
       return
 
@@ -51,6 +59,7 @@ class OLED:
       return
     
   def text_cn(self, string, x, y, font_size=16):
+    # 显示16x16字符串，英文、数字
     count = 0
     for str in string:
       if str in fonts:
@@ -98,6 +107,7 @@ class OLED:
     return scroll_offset
 
   def text_scroll(self, string, y):
+    # 显示滚动的16x16字符串，英文、数字
     try:
       while self.is_scroll:
         self.scroll_offset = self.draw_text(string, self.scroll_offset, y)
@@ -112,4 +122,5 @@ class OLED:
 
   
   def stop_scroll(self):
+    # 停止滚动
     self.is_scroll = False
