@@ -13,6 +13,5 @@ oled = OLED()
 
 # 显示滚动文字
 oled.clear()
-oled.text_cn('比老马还六', 0, 0)
+oled.text_scroll('比老马还六', 0)
 oled.show()
-oled.text_scroll()
