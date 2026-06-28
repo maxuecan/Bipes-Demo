@@ -273,7 +273,7 @@ module.exports = [
         <block type="oled_text8">
           <value name="text">
             <shadow type="text">
-              <field name="TEXT">欢迎光临</field>
+              <field name="TEXT">Hello</field>
             </shadow>
           </value>
           <value name="x">
