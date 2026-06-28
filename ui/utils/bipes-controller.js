@@ -50,7 +50,7 @@ export default class BipesController extends Common {
             }
             
             // 重置扩展按钮
-            $('#extensions-btn').css('display', mode === 'turtle' ? 'block' : 'none')
+            $('#extensions-btn').css('display', ['hardware', 'turtle'].includes(mode) ? 'block' : 'none')
             this.EXTENSIONS_BTN.resetPostion()
 
             // 重置案例内容

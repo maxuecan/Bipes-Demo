@@ -14,7 +14,7 @@ export default class extensionsBtn {
         setTimeout(() => {
             let { mode } = this.settings
             resetPostion()
-            $('#extensions-btn').css('display', mode === 'turtle' ? 'block' : 'none')
+            $('#extensions-btn').css('display', ['hardware', 'turtle'].includes(mode) ? 'block' : 'none')
         }, 1000);
     }
     // 初始化事件

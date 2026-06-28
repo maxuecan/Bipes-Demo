@@ -37,21 +37,31 @@ export default class extensionsDialog {
     // 创建扩展列表
     createList() {
         $('.extensions-list').empty()
-        for (let i in this.list) {
+        let mode = null
+        let _list = null
+        try {
+            const savedSettings = localStorage.getItem('settings')
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                mode = settings.mode
+            }
+        } catch(e) {}
+        _list = mode ? this.list.filter(item => item.type === mode) : this.list
+        for (let i in _list) {
             let li = $('<li>')
-                    .attr('key', this.list[i]['type'])
+                    .attr('key', _list[i]['type'])
                     .css({
-                        background: `url(${this.list[i]['image']}) center/cover no-repeat`,
+                        background: `url(${_list[i]['image']}) center/cover no-repeat`,
                     })
             let box = $('<div>')
                     .addClass('extensions-list-image')
-                    .attr('key', this.list[i]['type'])
+                    .attr('key', _list[i]['type'])
             let detail = $('<div>')
                 .addClass('extensions-list-detail')
-                .attr('key', this.list[i]['type'])
+                .attr('key', _list[i]['type'])
 
-            let name = $('<h4>').text(this.list[i]['name']).attr('key', this.list[i]['type'])
-            let remark = $('<span>').text(this.list[i]['remark']).attr('key', this.list[i]['type'])
+            let name = $('<h4>').text(_list[i]['name']).attr('key', _list[i]['type'])
+            let remark = $('<span>').text(_list[i]['remark']).attr('key', _list[i]['type'])
             detail.append(name).append(remark)
             $('.extensions-modal-list').append(li.append(box).append(detail))
         }
