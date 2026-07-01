@@ -74,7 +74,7 @@ function throwBack() {
   return new Promise(async (resolve, reject) => {
     console.log('目录抛回');
     // 复制目录
-    // await exists('./devinfo', './build/devinfo', copyDir)
+    await exists('./devinfo', './build/devinfo', copyDir)
     // await exists('./jsTree', './build/jsTree', copyDir)
     await exists('./media', './build/media', copyDir)
     console.log('-----------');

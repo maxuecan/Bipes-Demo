@@ -19,6 +19,19 @@ ui
 ├── webpack.config-dev.js   // 开发环境webpack配置
 ├── webpack.config.js       // 生产环境webpack配置
 
+# node版本
+20以上
+
+# webpack插件下载报错处理
+1，npm ERR! gifsicle@5.3.0 postinstall: `node lib/install.js`
+npm i imagemin-gifsicle@7.0.0 -D --ignore-scripts
+npm i imagemin-jpegtran@7.0.0 -D --ignore-scripts
+npm i imagemin-optipng@8.0.0 -D --ignore-scripts
+npm i imagemin-svgo@10.0.1 -D --ignore-scripts
+
+2，node_modules\optipng-bin\vendor\optipng.exe ENOENT 缺少.exe文件
+项目根目录有optipng文件夹，将.exe文件复制到node_modules\optipng-bin\vernder
+
 # 项目运行
 1，开发环境
 cd ui

@@ -197,10 +197,10 @@ module.exports = {
           from: path.resolve(__dirname, 'blockly'),
           to: 'blockly'
         },
-        {
-          from: path.resolve(__dirname, 'devinfo'),
-          to: 'devinfo'
-        },
+        // {
+        //   from: path.resolve(__dirname, 'devinfo'),
+        //   to: 'devinfo'
+        // },
         {
           from: path.resolve(__dirname, 'style.css'),
           to: 'style.css' 
