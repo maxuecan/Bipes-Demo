@@ -49,19 +49,19 @@ export default class extensionsDialog {
         _list = mode ? this.list.filter(item => item.type === mode) : this.list
         for (let i in _list) {
             let li = $('<li>')
-                    .attr('key', _list[i]['type'])
+                    .attr('key', _list[i]['key'])
                     .css({
                         background: `url(${_list[i]['image']}) center/cover no-repeat`,
                     })
             let box = $('<div>')
                     .addClass('extensions-list-image')
-                    .attr('key', _list[i]['type'])
+                    .attr('key', _list[i]['key'])
             let detail = $('<div>')
                 .addClass('extensions-list-detail')
-                .attr('key', _list[i]['type'])
+                .attr('key', _list[i]['key'])
 
-            let name = $('<h4>').text(_list[i]['name']).attr('key', _list[i]['type'])
-            let remark = $('<span>').text(_list[i]['remark']).attr('key', _list[i]['type'])
+            let name = $('<h4>').text(_list[i]['name']).attr('key', _list[i]['key'])
+            let remark = $('<span>').text(_list[i]['remark']).attr('key', _list[i]['key'])
             detail.append(name).append(remark)
             $('.extensions-modal-list').append(li.append(box).append(detail))
         }
@@ -130,8 +130,8 @@ export default class extensionsDialog {
         resetPostion()
     }
     /* 获取扩展积木的XML */
-    getExtendsionsXML(type) {
-        let item = ExtensionsList.filter(itm => itm.type === type)
+    getExtendsionsXML(key) {
+        let item = ExtensionsList.filter(itm => itm.key === key)
         return item[0].xml
     }
     // 重置toolbox

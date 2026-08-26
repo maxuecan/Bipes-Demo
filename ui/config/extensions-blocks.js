@@ -6,6 +6,7 @@ module.exports = [
     type: 'turtle',
     name: '海龟函数',
     image: turtle,
+    key: 'turtle',
     remark: '可以调用海龟编辑器中对应Python函数。',
     xml: `
             <category name="海龟" colour="%{BKY_TURTLE_HUE}">
@@ -265,6 +266,7 @@ module.exports = [
     type: 'hardware',
     name: '显示屏',
     image: oled,
+    key: 'monitor',
     remark: '0.96寸显示屏使用',
     xml: `
       <category name="显示屏">
@@ -317,6 +319,107 @@ module.exports = [
           </value>
         </block>
       </category>
+    `
+  },
+  {
+    type: 'hardware',
+    name: '输入/输出',
+    image: oled,
+    key: 'led',
+    remark: 'LED 灯条',
+    xml: `
+        <category name="输入/输出">
+            <block type="io_rate"></block>
+            <block type="io_init_pin">
+                <value name="PIN">
+                    <shadow type="text">pin</shadow>
+                </value>
+                <value name="NUM">
+                    <block type="io_pin"></block>
+                </value>
+            </block>
+            <block type="io_pinout_set">
+                <value name="PIN">
+                    <block type="io_pinvar"></block>
+                </value>
+                <value name="RATE">
+                    <block type="io_rate"></block>
+                </value>
+            </block>
+            <block type="io_pinin_set">
+                <value name="PIN">
+                    <block type="io_pinvar"></block>
+                </value>
+            </block>
+            <block type="io_init_pin_in">
+                <value name="PIN"> 
+                    <shadow type="text">
+                        <field name="TEXT">abc</field>
+                    </shadow>
+                </value>
+                <value name="NUM">
+                    <block type="io_pin"></block>
+                </value>
+            </block>
+            <block type="io_in_voltage">
+                <value name="PIN">
+                    <block type="io_pinpro"></block>
+                </value>
+            </block>
+            <block type="io_in_get">
+                <value name="PIN">
+                    <block type="io_pinpro"></block>
+                </value>
+            </block>
+            <block type="io_init_pwmout_set">
+                <value name="PIN"> 
+                    <shadow type="text">
+                        <field name="TEXT">pwm</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="io_pwmout_set">
+                <value name="PIN">
+                    <block type="io_pinpwm"></block>
+                </value>
+                <value name="RATE">
+                    <shadow type="math_number">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="io_pwmout_rate_set">
+                <value name="PIN">
+                    <block type="io_pinpwm"></block>
+                </value>
+                <value name="RATE">
+                    <shadow type="math_number">
+                        <field name="NUM">2000</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="io_init_touch_sensor_set">
+                <value name="PIN"> 
+                    <shadow type="text">
+                        <field name="TEXT">tc</field>
+                    </shadow>
+                </value>
+                <value name="TATE">
+                    <block type="io_pin"></block>
+                </value>
+            </block>
+            <block type="io_touch_sensor_get"></block>
+            <block type="io_stop">
+                <value name="PIN">
+                    <block type="io_pin"></block>
+                </value>
+                <value name="FUNC"> 
+                    <shadow type="text">
+                        <field name="TEXT">attachInterrupt_func</field>
+                    </shadow>
+                </value>
+            </block>
+        </category>
     `
   }
 ]
